@@ -1,0 +1,61 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-08-16 19:32:31
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-08-16 20:06:57
+ * @FilePath: /JavaScript/02_数据类型/01_数值.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数值</title>
+  <script>
+    /*
+        数值（Number）
+          - 在JS中所有的整数和浮点数都是 Number 类型
+          - JS 的数值并不是无限大的，当数值超过一定范围后会显示近似值
+            - 数值过大会显示近似值，再大显示科学计数法，无穷大会显示 Infinity
+          - 所以在 JS 中进行一些精度比较高的运算时要十分注意
+     */
+
+    let a = 10;
+    a = 10.5;
+    a = 3.14;
+    a = 9999999999999991;
+    a = 9999999999999991111;
+    a = 999999999999999111111111111111;
+    a = Infinity;
+    a = 1.1111111111111111;
+    a = 0.2 + 0.1;
+    a = 1 - 'hello'; // NaN(Not a  Number)
+
+    /*
+        大整数（BigInt）
+          - 大整数用来表示一些比较大的整数
+          - 大整数使用n结尾，它可以表示的数字范围是无限大的
+    */
+    a = 99999999999999999999999999999999999999999n;
+
+
+    /*
+        其他进制的数字：
+          二进制  0b 以开头
+          八进制  0o 以开头
+          十六进制 0x 以开头
+    */
+    a = 0b1010;
+    a = 0o1010;
+    a = 0x1010;
+
+    console.log(a);
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
