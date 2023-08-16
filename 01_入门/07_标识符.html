@@ -1,0 +1,53 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-08-16 18:06:58
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-08-16 18:45:04
+ * @FilePath: /JavaScript/01_入门/07_标识符.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>标识符</title>
+  <script>
+    /*
+        在JS中，所有可以由我们自主命名的内容，都可以认为是一个标识符
+          - 比如：变量名、函数名、类名……
+
+        使用标识符需要遵循如下的命名规范：
+          1. 标识符只能含有字母、数字、下划线、$，且不能以数字开头
+          2. 标识符不能是 JS 中的关键字和保留字, 也不建议使用内置的函数或类名作为变量名
+          3. 命名规范：
+              - 通常会使用驼峰命名法
+                  - 首字母小写，每个单词开头大写
+                  - maxlength -- maxLength
+                  - borderleftwidth -- borderLeftWidth
+              - 类名会使用大驼峰命名法：
+                  - 首字母大写，每个单词开头大写
+                  - maxlength -- MaxLength
+
+              - 常量的字母会全部大写
+                  - maxlength -- MAX_LENGTH
+    */
+
+    let a = 10;
+    let _this = 123;
+    let $fun = function() {};
+    let abc123 = 'javascript';
+    console.log(a);
+
+    let alert = 12;
+    console.log(alert);
+
+    // alert(123); // Uncaught TypeError: alert is not a function
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
