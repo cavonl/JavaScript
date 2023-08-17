@@ -1,0 +1,34 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-08-17 08:47:38
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-08-17 10:49:43
+ * @FilePath: /JavaScript/02_数据类型/02_类型检查.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>类型检查</title>
+  <script>
+    let a = 10;
+    let b = 10n;
+    console.log(a, b);
+
+    // console.log(a + b); // Uncaught TypeError: Cannot mix BigInt and other types, use explicit conversions
+
+    /*
+        typeof 运算符
+          - typeof 用来检查不同值的类型
+              - 检查的是变量的值的类型，而不是变量
+          - 它会根据不同的值返回不同的结果
+    */
+    console.log(typeof a); // number
+    console.log(typeof b); // bigint
+  </script>
+</head>
+<body>
+  
+</body>
+</html>
