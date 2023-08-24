@@ -1,0 +1,67 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-08-18 12:26:54
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-08-24 20:29:13
+ * @FilePath: /JavaScript/02_数据类型/03_字符串.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>字符串</title>
+  <script>
+    /*
+      字符串
+        - 在JS中使用单引号或双引号来表示字符串
+        - 转义字符 \
+            \"    "
+            \'    '
+            \\    \
+            \t    制表符
+            \n    换行
+        - 模版字符串
+            - 使用反单引号 `` 来表示模版字符串
+            - 模版字符串中可以嵌入变量
+    */
+
+    //  单双引号保持一致
+    let a = '早早早';
+    a = "早上好";
+
+    a = '你也"早上好"';
+
+    a = '你也\"早上好"';
+    a = '你也\'"早上好"';
+    a = '你ye\t"早上好"';
+    a = '你也\n"早上好"';
+
+    a = `塔拉嘿呦～～`;
+    a = `塔  拉  嘿  呦
+    ～
+    ～`;
+
+    let c = 'C', l = 'L', f = 'F';
+
+    a = `${c}${l}和${c}${f}以后一定会在一起的～`;
+
+    console.log(a);
+
+    let b = 10;
+    console.log(`b = ${b}`);
+
+    let n = 10;
+    n = '10';
+    n = `10`;
+    console.log(typeof n);
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
