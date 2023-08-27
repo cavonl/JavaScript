@@ -1,0 +1,61 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-08-27 13:14:29
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-08-27 20:32:38
+ * @FilePath: /JavaScript/02_数据类型/05_类型转换-字符串.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>类型转换-字符串</title>
+  <script>
+    /*
+      类型转换值将一种数据类型转换为其他类型，将其他类型转换为字符串、数值和布尔值
+
+      转换为字符串
+        1. 调用toString()方法将其他类型转换为字符串
+          - 调用 xxx 的 yyy 方法 --» xxx.yyy()
+          - 由于null和undefined没有toString(), 所以对这两个数据类型调用toString()时会报错
+        2. 调用String()将其他类型转换为字符串
+          - 调用 xxx 函数 --» xxx()
+          - 原理：
+              - 对于拥有toString()方法的值调用String()函数时，实际上就是在调用toString()方法
+              - 对于null，则直接转换为"null"
+              - 对于undefined，则直接转换为"undefined"
+
+    */
+
+    let a = 10; // number 10
+    a = true;
+    a = 11n;
+    // a = null; // Uncaught TypeError: Cannot read properties of null (reading 'toString')
+    // a = undefined; // Uncaught TypeError: Cannot read properties of undefined (reading 'toString')
+    console.log(typeof a, a); // 原始数据类型
+
+    // a.toString(); // "10"
+    // console.log(typeof a, a); // number 10
+    // console.log(typeof a.toString(), a.toString()); // string "10"
+
+    a = a.toString(); // string "xxx"
+    console.log(typeof a, a); // string 的数据类型
+
+    let b = 33; // number 33
+    String(b); // number 33
+    b = null; // object null
+    b = undefined; // undefined undefined
+    console.log(typeof b, b); // 原始数据类型
+
+    b = String(b); // string "xxx"
+    console.log(typeof b, b); // string 的数据类型
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
