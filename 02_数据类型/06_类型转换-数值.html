@@ -1,0 +1,84 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-08-28 08:07:28
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-08-28 11:00:40
+ * @FilePath: /JavaScript/02_数据类型/06_类型转换-数值.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>类型转换-数值</title>
+  <script>
+    /*
+      将其他的数据类型转换为数值
+        1. 使用Number()函数来将其他类型转换为数值
+          - 转换的情况
+            - 字符串：
+              a. 如果字符串是一个合法的数字，则会自动的转换为对应的数字
+              b. 如果字符串不是合法的数字，则转换为NaN
+              c. 如果字符串是空串纯空格的字符串，则转换为0
+            - 布尔值：true转换为1，false转换为0
+            - null：转换为0
+            - undefined：转换为NaN
+
+        2. 专门用来将字符串转换为数值的两个方法
+          parseInt() 将一个字符串转换为一个整数
+            - 解析时，会自左向右读取一个字符串，直到读取字符串中所有的有效整数
+            - 也可以使用parseInt()来对一个数值进行取整
+          parseFloat() 将一个字符串转换为一个浮点数
+            - 解析时，会自左向右读取一个字符串，直到读取字符串中所有的有效小数
+    */
+
+    let a = '123'; // string 123 // number 123
+    a = 'adadsd'; // string adadsd // number NaN
+    a = '3.1415926'; // string 3.1415926 // number 3.1415926
+    a = '11px'; // string 11px // number NaN
+    // a = ''; // string 空  // number 0
+    // a = '      ';  // string 空 // number 0
+    a = true; // boolean true // number 1
+    a = false; // boolean true // number 0
+    a = null; // object null // number 0
+    a = undefined; // undefined undefined // number NaN
+    console.log(typeof a, a);
+
+    a = Number(a);
+    console.log(typeof a, a);
+
+
+    let b1 = '123px';
+    let b2 = '123px';
+    console.log('b1: ', typeof b1, b1);
+    console.log('b2: ', typeof b2, b2);
+
+    b1 = 'a123'; // NaN
+    b1 = '3.14'; // 3
+    b1 = 456; /* 如果本身就是数字，会先将数字转换成字符串，然后再一个一个解析转换成数字 */
+
+    b1 = parseInt(b1); // number 123
+    b2 = Number(b2); // number NaN
+    console.log('b1: ', typeof b1, b1);
+    console.log('b2: ', typeof b2, b2);
+
+
+    let c = '3.14px';
+    c = 'a3.14';
+    c = undefined;
+    c = null;
+    c = '3.a123';
+    console.log(typeof c, c);
+
+    c = parseFloat(c);
+    console.log(typeof c, c);
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
