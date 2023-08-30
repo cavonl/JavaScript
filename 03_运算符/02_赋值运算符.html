@@ -1,0 +1,62 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-08-30 20:03:56
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-08-30 21:24:23
+ * @FilePath: /JavaScript/03_运算符/02_赋值运算符.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>赋值运算符</title>
+  <script>
+    /*
+      赋值运算符用来将一个值赋值给一个变量
+
+        =     将符号右侧的值赋值给左侧的变量
+        +=    a += n 等价于 a = a + n
+        -=    a -= n 等价于 a = a - n
+        *=    a *= n 等价于 a = a * n
+        /=    a /= n 等价于 a = a / n
+        %=    a %= n 等价于 a = a % n
+        **=   a **= n 等价于 a = a ** n
+        ??=
+          - 空赋值
+          - 只有当变量的值为null或undefined时才会对变量进行赋值
+
+    */
+    let a = 10;
+    // 5 = a; // Uncaught SyntaxError: Invalid left-hand side in assignment
+    a = 5; // 将右边的值赋值给左边的变量
+
+    let b = a; // 一个变量只有在 = 左边时才是变量，在等于右边时它是值
+
+    a = 66;
+    a + 11;
+    a = a + 11; // 大部分的运算符都不会改变变量的值，赋值运算符除外
+
+    a = 5;
+    // a = a + 5; // 10
+    a += 5; // 在a原来的基础上增加5
+
+    // a = 101;
+    a ??= 101; // 10(a的上一个赋值)
+
+    console.log(a);
+
+    let c = undefined;
+    c = null;
+    c ??= 101;
+
+    console.log(c);
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
