@@ -1,0 +1,71 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-02 16:40:35
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-02 19:49:42
+ * @FilePath: /JavaScript/03_运算符/06_逻辑运算符.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>逻辑运算符</title>
+  <script>
+    /*
+      && 逻辑与
+        - 可以对两个值进行与运算
+        - 当&&左右都为true时，则返回true，否则返回false
+        - 与运算是短路的与，如果是第一个值为false，则不看第二个值
+        - 与运算是找false的，如果找到false则直接返回，没有false才会返回true
+        - 对于非布尔值进行与运算，它会转换为布尔值然后运算，但是最终会返回原值
+            - 如果第一个值为false，则直接返回第一个值
+              如果第一个为true， 则返回第二个值
+
+      || 逻辑或
+        - 可以对两个值进行或运算
+        - 当||左右有true时，则返回true，否则返回false
+        - 或运算是短路的或，如果第一个值为true，则不看第二个值
+        - 或运算是找true，如果找到true则直接返回，没有true才会返回false
+        - 对于非布尔值或运算，它会转换为布尔值然后运算，但是最终会返回原值
+            - 如果第一个值为true，则返回第一个
+              如果第一个值为false，则返回第二个
+    */
+
+    let result = true && true; // true
+    result = false && true; // false
+    result = true && false; // false
+    result = false && false; // false
+
+    // true && alert(123); // 第一个值为true，alert()会执行
+    // false && alert(123); // 第一个值为false，alert()不会执行
+
+    //    true && true  -» true
+    result = 1 && 2; // 2
+    //    true && false -» false
+    result = 2 && 0; // 0
+
+    //   false && false -» false
+    result = 0 && NaN; // 0
+
+    result = true || false; // true
+    result = false || true; // true
+    result = true || true; // true
+    result = false || false; // false
+
+    // false || alert(123); // 第一个值为false，alert()会执行
+    true || alert(123); // 第一个值为true，alert()不会执行
+
+    result = 1 || 2; // 1
+    result = 'hello' || NaN; // hello
+    result = null || 1; // 1
+    result = undefined || null; // null
+
+
+    console.log(result);
+  </script>
+</head>
+<body>
+  
+</body>
+</html>
