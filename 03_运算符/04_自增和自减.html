@@ -1,0 +1,87 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-02 09:20:24
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-02 10:49:34
+ * @FilePath: /JavaScript/03_运算符/04_自增和自减.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>自增和自减</title>
+  <script>
+    /*
+      ++ 自增运算符
+        - ++ 使用后会使得原来的变量立刻增加1
+        - 自增分为前自增(++a)和后自增(a++)
+        - 无论是a++和++a都会使原变量立刻增加1
+        - 不同的是++a和a++所返回的值不同
+            a++是自增前的值 旧值
+            ++a是自增后的值 新值
+
+      -- 自减运算符
+        - --使用后会使得原来的变量立刻减少1
+        - 自减分为前自减(--a)和后自减(++a)
+        - 无论是a--和--a都会是原变量立刻减少1
+        - 不同的是--a和a--所返回的值不同
+            a--是自减前的值 旧值
+            --a是自减后的值 新值
+    */
+
+    let a = 10;
+    // a = a++;
+    // a++; // a =+ a;
+
+    // ++a;
+
+    console.log(a);
+
+    // let b = a++;
+    // console.log('a++ =', b); // 10
+
+    let b = ++a;
+    console.log('++a =', b); // 11
+
+    let n = 5;
+    //            5 +  7   + 7
+    let result = n++ + ++n + n;
+    console.log(result); // 19
+
+    let c = 1;
+    //       2  + 2 + 2   +  4
+    let d = ++c + c + c++ + ++c;
+    console.log(d);
+
+    console.log('aaaa: ', a);
+    //       12 + 12 + 12 + 14
+    let e = ++a + a + a++ + ++a;
+    console.log('eeeee: ', e); 50
+
+
+
+    a = 5;
+    // console.log('--a', --a);
+    // console.log('a--', a--);
+    console.log(a);
+
+    a = 5;
+    //      4   - 4   - 3 - 3   -  1
+    let f = --a - a-- - a - a-- - --a;
+    console.log(f); // -7
+
+    a = 5;
+    //      5   - 4 + 3   - 2   - 2   - 1   - 0
+    let g = a-- - a + --a - --a - a-- - a-- - a;
+    console.log(g); // -1
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
