@@ -1,0 +1,43 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-02 22:31:54
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-02 22:40:35
+ * @FilePath: /JavaScript/03_运算符/09_条件运算符.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>条件运算符</title>
+  <script>
+    /*
+      条件运算符
+        条件表达式 ? 表达式1 : 表达式2
+        - 执行顺序：
+            条件运算符在执行时，会先对条件表达式进行求值判断?
+              如果结果为true，则执行表达式1:
+              如果结果为false，则执行表达式2
+    */
+
+    // true ? alert(1) : alert(2);
+    // false ? alert(1) : alert(2);
+
+    // let a = 10, b = 20;
+    // let a = 30, b = 20;
+    // a > b ? alert('aa大') : alert('bb大');
+
+    // let a = 100, b = 200;
+    let a = 300, b = 200;
+    let m = a > b ? a : b;
+    alert(m);
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
