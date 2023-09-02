@@ -1,0 +1,67 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-02 19:55:38
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-02 20:50:29
+ * @FilePath: /JavaScript/03_运算符/07_关系运算符.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>关系运算符</title>
+  <script>
+    /*
+      关系运算符
+        - 关系运算符用来检查两个值之间的关系是否成立，成立返回true，不成立返回false
+
+        > 用来检查左值是否大于右值
+        >= 用来检查左值是否大于等于右值
+        < 用来检查左值是否小于右值
+        <= 用来检查左值是否小于等于右值
+
+      注意：
+        当对非数值进行关系运算时，它会先将其转换为数值然后再比较
+        当关系运算符的两端是两个字符串，它不会将字符串转换为数值，
+          而是逐位的比较字符的Unicode编码, 利用这个特点可以对字符串按照字母排序
+        注意比较两个字符串格式的数字时，一定要进行类型转换
+
+    */
+
+    let result = 10 > 5; // true
+    result = 5 > 5; // false
+    result = 5 >= 5; // true
+
+    //       5 < 10
+    result = 5 < '10'; // true
+    //        1  > 0
+    result = '1' > false; // true
+
+    //        97 < 98
+    result = 'a' < 'b'; // true
+    // abc逐位比较b，先比a，a比b大，返回true
+    result = 'abc' < 'b'; // true
+    // 逐位比较 1 比 2 小
+    result = '12' < '2'; // true
+
+    // 隐式转换
+    result = +'12' < +'2'; // false
+
+    // 检查 num 是否在5和10之间
+    let num = 6;
+    num = 60;
+    num = 4;
+    result = 5 < num < 10; // true // 错误的写法
+    result = num > 5 && num < 10;
+
+    console.log(result);
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
