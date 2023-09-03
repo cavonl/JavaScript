@@ -2,7 +2,7 @@
  * @Author: chengfun 425247833@qq.com
  * @Date: 2023-09-03 16:41:44
  * @LastEditors: chengfun 425247833@qq.com
- * @LastEditTime: 2023-09-03 16:45:12
+ * @LastEditTime: 2023-09-03 16:56:04
  * @FilePath: /JavaScript/04_流程控制/04_练习1-2.html
 -->
 <!DOCTYPE html>
@@ -22,10 +22,11 @@
     */
 
     // 编写一个程序，获取一个用户输入的整数
-    let num = parseInt(prompt('请输入一个整数：'));
+    // let num = parseInt(prompt('请输入一个整数：'));
+    let num = +prompt('请输入一个整数：');
 
     // 判断是否是数字
-    if (isNaN(num)) {
+    if (isNaN(num) || num % 1 !== 0) {
       alert('你输入的格式不正确，请重新输入一个整数！');
     } else {
       // 然后通过程序显示这个数是奇数还是偶数
