@@ -1,0 +1,52 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-03 09:13:41
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-03 10:34:56
+ * @FilePath: /JavaScript/04_流程控制/01_代码块.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>代码块</title>
+  <script>
+    /*
+      使用 {} 来创建代码块，代码块可以用来对代码进行分组
+        同一个代码块中的代码，就是同一组代码，一个代码块中的代码要么都执行，要么都不执行
+
+      let 和 var
+        - 在JS中，使用let声明的变量具有块作用域
+            在代码块中声明的变量无法在代码块的外部访问
+
+        - 使用var声明的变量，不具有块作用域
+    */
+
+    {
+      let a = 10;
+      console.log(a); // 10
+      // alert(123);
+    }
+    // console.log(a); // Uncaught ReferenceError: a is not defined
+
+    {
+      console.log('哈哈');
+      document.write("嘻嘻");
+    }
+
+    {
+      var b = 50;
+
+    }
+    console.log(b); // 50
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
