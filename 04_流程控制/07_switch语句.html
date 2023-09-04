@@ -1,0 +1,87 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-04 07:53:06
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-04 12:57:38
+ * @FilePath: /JavaScript/04_流程控制/07_switch语句.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>switch语句</title>
+  <script>
+    /*
+      switch语句
+        - 语法：
+            switch (表达式) {
+              case 表达式:
+                语句...
+                break;
+              case 表达式:
+                语句...
+                break;
+              default:
+                break;
+            }
+
+        - 执行的流程
+            switch语句在执行时，会依次将switch后的表达式和case后的表达式进行全等比较，
+              如果比较结果为true，则自当前case处开始执行代码；
+              如果比较结果为false，则继续比较其他case后的表达式，直到找到true为止
+              如果所有的比较都是false，则执行default后的语句
+
+        - 注意：
+            当比较结果为true时，会从当前case处开始执行代码，也就是说case是代码执行的起始位置
+              这就意味着只要是当前case后的代码，都会执行，可以使用break来避免执行其他的case
+
+        - 总结：
+            switch语句和if语句的功能是重复，switch语句能做的事if语句也能做，反之亦然。
+            它们的区别：switch在多个全等判断时，结构比较清晰
+
+    */
+
+    /*
+      1 壹
+      2 贰
+      3 叁
+    */
+    // 根据用户输入的数据显示中文
+    let num = +prompt('请输入一个数字：')
+
+    // if (num === 1) {
+    //   alert('壹');
+    // } else if (num === 2) {
+    //   alert('贰');
+    // } else if (num === 3) {
+    //   alert('叁');
+    // }
+
+    switch (num) {
+      default:
+        alert('啥都不是')
+        break;
+      case 1:
+        alert('壹');
+        // break可以用来结束switch语句
+        break;
+      case 2:
+        alert('贰');
+        break;
+      case 3:
+        alert('叁');
+        break;
+      // default:
+      //   alert('啥都不是')
+      //   break;
+    }
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
