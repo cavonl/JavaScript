@@ -1,0 +1,41 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-06 10:49:16
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-06 11:13:32
+ * @FilePath: /JavaScript/04_流程控制/09_while语句练习2.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>while语句练习2</title>
+  <script>
+    /*
+      练习：假设银行存款年利率为5%，问1000块存多少年可以变成5000块
+    */
+
+    // 创建本金初始化变量
+    let money = 1000;
+    // 计算器统计年数
+    let year = 0;
+
+    // 本金 + 利息一年的钱
+    // money = money + money * 0.05;
+
+    while (money < 5000) {
+      money = money + money * 0.05;
+      year++;
+    }
+
+    console.log(`1000块存${year}年可以变成${money}块`);
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
