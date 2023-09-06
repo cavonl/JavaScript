@@ -1,0 +1,81 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-06 17:02:05
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-06 18:30:59
+ * @FilePath: /JavaScript/04_流程控制/12_for循环练习.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>for循环练习</title>
+  <script>
+    /*
+      练习：
+        求100以内，所有3的倍数（求它们个数和总和）
+    */
+
+    // 计数器       累加器
+    let count = 0, total = 0;
+
+    // 100以内的数
+    for (let i = 0; i <= 100; i++) {
+      // console.log(i);
+      // 求3的倍数
+      if (i % 3 === 0) {
+        count++;
+        total += i;
+      }
+    }
+
+    console.log(`100以内所有3的倍数有${count}个, 总和为${total}`);
+
+    let num = 0, sum = 0;
+    // 初始值为3说明不包括0，对乘积有好处
+    for (let j = 3; j <= 100; j += 3) {
+      num++;
+      sum += j;
+    }
+
+    console.log(`100以内所有3的倍数有${num}个, 总和为${sum}`);
+
+    /*
+      练习：
+        求1000以内的水仙花数
+          - 一个 n 位数 (n >= 3), 如果它各个位上数字的n次幂之和还等于这个数，那么这个数就是一个水仙花数
+          - 153 ——› 1 5 3 ——› 1 125 27 ——› 153
+    */
+
+    let result = [], count2  = 0;
+
+    // 1000以内的三位数
+    for (let k = 100; k < 1000; k++) {
+      // console.log(k);
+      let one = k % 10; // 个位数
+      let ten = parseInt((k % 100) / 10); // 十位数
+      let hundred = parseInt((k % 1000) / 100); // 百位数
+      // console.log(hundred, ten, one);
+
+      let sum = one ** 3 + ten ** 3 + hundred ** 3;
+
+      if (k === sum) {
+        console.log(k, sum);
+        result.push(k);
+        count2++;
+      }
+    }
+
+    console.log(`1000以内的水仙花数有${count2}个，它们分别是${result.join(', ')}`);
+
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
