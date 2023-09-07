@@ -1,0 +1,86 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-06 21:45:08
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-07 18:49:21
+ * @FilePath: /JavaScript/04_流程控制/14_练习2.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>练习2</title>
+  <script>
+    /*
+      练习：
+        1. 求100以内，所有3的倍数（求它们个数和总和）
+
+        2. 求1000以内的水仙花数
+          - 一个 n 位数 (n >= 3), 如果它各个位上数字的n次幂之和还等于这个数，那么这个数就是一个水仙花数
+          - 153 ——› 1 5 3 ——› 1 125 27 ——› 153
+
+        3. 获取用户输入的大于1的整数（暂时不考虑输错的情况），然后编写代码检查这个数字是否是质数，并打印结果
+
+           质数：
+            - 一个数只能被1和它本身整除，那么这个数就是质数
+            - 1既不是质数也不是合数
+
+        4. 假设银行存款年利率为5%，问1000块存多少年可以变成5000块
+    */
+
+    // 题1
+    let count = 0, result = 0;
+    for (let i = 0; i < 100; i++) {
+      if (i % 3 === 0) {
+        count++;
+        result += i;
+      }
+    }
+    console.log(`100以内，所有3的倍数有${count}个，总和为${result}`);
+
+    // 题2
+    let n = 0, arr = [];
+    for (let j = 100; j < 1000; j++) {
+      let ge = j % 10; // 个位数
+      let shi = parseInt(j % 100 / 10); // 个位数
+      let bai = parseInt(j % 1000 / 10 / 10); // 百位数
+      if (bai ** 3 + shi ** 3 + ge ** 3 === j) {
+        n++;
+        arr.push(j);
+      }
+    }
+    console.log(`1000以内的水仙花数有${n}个，分别为${arr.join(', ')}`);
+
+    // 题3
+    let flag = true;
+    let num = +prompt('请输入一个大于1的整数：');
+    for (let k = 2; k < num; k++) {
+      if (num % k === 0) {
+        flag= false;
+      }
+    }
+    if (flag) {
+      console.log(`你输入的${num}是一个质数`);
+    } else {
+      console.log(`你输入的${num}不是一个质数`);
+    }
+
+    // 题4
+    let money = 1000, year = 0;
+    while (money < 5000) {
+      // money = money + money * 0.05;
+      money = money * 1.05;
+      year++;
+    }
+    console.log(`1000块存${year}年可以变成${money}块`);
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
