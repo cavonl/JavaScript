@@ -1,0 +1,68 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-08 22:24:48
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-08 23:48:30
+ * @FilePath: /JavaScript/04_流程控制/20_练习.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>练习</title>
+  <script>
+    /*
+      求100以内的所有质数
+
+      优化前：
+        1. 10000以内：70ms
+        2. 100000以内：6000ms
+
+      第一次优化：
+        1. 10000以内：10ms
+        2. 100000以内：515ms
+        3. 1000000以内：41600ms
+
+      问题：如果修改代码，提升其性能
+        36
+        1  36
+        2  18
+        3  12
+        4  9
+        6  6
+        ... 其他都是重复的
+        那么可以使用开方，也就是二分查找提升性能优化后：
+
+        第二次优化：
+        1. 10000以内：2ms
+        2. 100000以内：8ms
+        3. 1000000以内：96ms
+        4. 10000000以内：1994ms
+        5. 100000000以内：52600ms
+    */
+
+    console.time('质数计时');
+    for (let i = 2; i < 100000000; i++) {
+      let flag = true;
+      // 开根号（二分查找）
+      for (let j = 2; j <= i ** .5; j++) {
+        if (i % j === 0) {
+          flag = false;
+          break;
+        }
+      }
+      if (flag) {
+        // console.log(i);
+      }
+    }
+    console.timeEnd('质数计时');
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
