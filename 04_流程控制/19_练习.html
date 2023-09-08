@@ -1,0 +1,54 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-08 18:09:29
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-08 22:07:57
+ * @FilePath: /JavaScript/04_流程控制/19_练习.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>练习</title>
+  <script>
+    /*
+      求100以内的所有质数
+
+      优化前：
+        1. 10000以内：70ms
+        2. 100000以内：6000ms
+
+      优化后：
+        1. 10000以内：10ms
+        2. 100000以内：515ms
+        3. 1000000以内：41600ms
+
+      问题：如果修改代码，提升其性能
+    */
+
+    // 开始一个计时器
+    console.time('质数计时');
+    for (let i = 2; i < 100; i++) {
+      let flag = true;
+      for (let j = 2; j < i; j++) {
+        if (i % j === 0) {
+          flag = false;
+          // 进入判断说明i一定不是质数，后续检查没有执行的必要
+          break;
+        }
+      }
+      if (flag) {
+        // console.log(i);
+      }
+    }
+    console.timeEnd('质数计时');
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
