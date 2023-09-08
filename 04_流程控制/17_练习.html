@@ -1,0 +1,110 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-08 13:47:07
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-08 14:30:57
+ * @FilePath: /JavaScript/04_流程控制/17_练习.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>练习</title>
+  <script>
+    /*
+      练习1: 希望在网页中打印出如下图形
+        *****
+        *****
+        *****
+        *****
+        *****
+
+      练习2: 希望在网页中打印出如下图形
+        *
+        **
+        ***
+        ****
+        *****
+
+      练习3: 希望在网页中打印出如下图形
+        *****
+        ****
+        ***
+        **
+        *
+
+      练习4: 在网页中打印99乘法表
+        1 * 1 = 1
+        1 * 2 = 2   2 * 2 = 4
+        1 * 3 = 3   2 * 3 = 6   3 * 3 = 9
+        ......
+
+      练习5: 编写100以内所有的质数
+    */
+
+    // 练习1
+    for (let i = 0; i < 5; i++) {
+      for (let j = 0; j < 5; j++) {
+        document.write('* ')
+      }
+      document.write('<br>');
+    }
+    document.write('<hr>');
+
+    // 练习2
+    for (let i = 0; i < 5; i++) {
+      for (let j = 0; j < i + 1; j++) {
+        document.write('* ')
+      }
+      document.write('<br>');
+    }
+    document.write('<hr>');
+
+    // 练习3
+    for (let i = 0; i < 5; i++) {
+      for (let j = 0; j < 5 - i; j++) {
+        document.write('* ')
+      }
+      document.write('<br>');
+    }
+    document.write('<hr>');
+
+    // 练习4
+    for (let i = 1; i <= 9; i++) {
+      for (let j = 1; j < i + 1; j++) {
+        document.write(`<span style="display: inline-block; width: 100px;">${j} × ${i} = ${i * j}</span>`);
+      }
+      document.write('<br>');
+    }
+    document.write('<hr>');
+
+    // 练习5
+    let count = 0, result = [];
+    for (let i = 2; i < 100; i++) {
+      // 记录i的状态，初始化true为质数
+      let flag = true;
+      // 获取1-i的数
+      for (let j = 2; j < i; j++) {
+        // 判断i能不能被j整除
+        if (i % j === 0) {
+          // 进行判断，说明i不是质数，修改为false
+          flag = false;
+        }
+      }
+      // 判断结果
+      if (flag) {
+        count++;
+        result.push(i);
+      }
+    }
+    console.log(`100以内的质数有${count}个，分别为${result.join(', ')}`);
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
