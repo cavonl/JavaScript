@@ -1,0 +1,97 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-09 15:22:24
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-09 16:06:59
+ * @FilePath: /JavaScript/05_对象/02_对象的属性.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>对象的属性</title>
+  <script>
+    /*
+      属性名
+        - 通常属性名就是一个字符串，所以属性名可以是任何值，没有什么特殊要求
+            但是如果你的属性名太特殊了，不能直接使用，需要使用[]来设置
+            虽然如此，但是我们还是强烈建议属性名也按照标识符的规范命名
+
+        - 也可以使用符号（symbol）作为属性名，来添加属性
+            获取这种属性名时，也必须使用symbol
+
+          使用symbol添加的属性，通常是那些不希望被外界访问的属性
+
+      属性值
+        - 对象的属性值可以是任意的数据类型，也可以是一个对象
+
+      使用typeof检查一个对象时，会返回object
+
+      in 运算符
+        - 用来检查对象中是否含有某个属性
+        - 语法：属性名 in object
+        - 如果有返回true，没有返回false
+
+    */
+    let obj = new Object();
+
+    obj.name = '孙悟空';
+    // obj.let='哈哈'; // 不建议
+    // obj.if = '嘻嘻'; // 不建议
+    // obj['dsde2e323-snfkna*aqe@#$#@42'] = '呵呵'; // 不建议
+    // 读取属性
+    // console.log(obj['dsde2e323-snfkna*aqe@#$#@42']);
+
+    let mySymbol = Symbol();
+    let newSymbol = Symbol();
+
+    // 使用symbol作为属性名
+    obj[mySymbol] = '通过symbol添加的属性';
+
+    // console.log(mySymbol);
+    // 谁存就谁取
+    // console.log(obj[newSymbol]); // undefined
+
+    obj.age = 18;
+    obj['gender'] = '男';
+
+    // 两种方式都能取
+    // console.log(obj.gender);
+    // console.log(obj['gender']);
+
+    let str = 'address';
+
+    // 注意变量名添加属性不能使用引号
+    // obj[str] = '花果山'; // address: '花果山'
+    obj['address'] = '花果山'; // address: '花果山'
+
+    obj.str = '二哈'; // 使用.的形式添加属性时，不能使用变量
+
+    obj.a = 123;
+    obj.b = 'hi';
+    obj.c = true;
+    obj.d = 123n;
+    obj.e = {};
+    obj.e.name = 'cl';
+    obj.e.age = 33;
+    obj.f = [];
+    obj.g = null;
+    obj.h = undefined;
+
+    console.log(obj);
+    console.log(typeof obj);
+
+    // 检查obj里面有没有name，有就返回true，没有返回false
+    console.log('name' in obj);
+    console.log('i' in obj);
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
