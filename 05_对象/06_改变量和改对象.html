@@ -1,0 +1,65 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-09 20:29:12
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-09 20:40:14
+ * @FilePath: /JavaScript/05_对象/06_改变量和改对象.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>改变量和改对象</title>
+  <script>
+    /*
+      修改对象
+        - 修改对象时，如果有其他变量指向该对象，则所有指向该对象的变量都会受到影响
+
+      修改变量
+        - 修改变量时，之后影响当前的变量
+
+      在使用变量存储对象时，很容易因为改变变量指向的对象，提高代码的复杂度
+        所以，通常情况下，声明存储对象的变量时会使用const
+
+      注意：
+        const 只是禁止变量被重新赋值，对对象的修改没有任何影响
+    */
+
+    let obj = {
+      name: '孙悟空'
+    };
+
+    let obj2 = obj;
+
+
+    obj2.name = '猪八戒'; // 修改对象
+
+    obj2 = null; // 修改变量
+
+
+    console.log(obj);
+    console.log(obj2);
+
+    const obj3 = {
+      name: '孙悟空'
+    };
+
+    const obj4 = obj3;
+
+    // obj4 = {}; // Assignment to constant variable.
+    obj4.name = '哈哈哈';
+
+    console.log(obj3);
+    console.log(obj4);
+
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
