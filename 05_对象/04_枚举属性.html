@@ -1,0 +1,55 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-09 16:38:57
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-09 17:11:39
+ * @FilePath: /JavaScript/05_对象/04_枚举属性.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>枚举属性</title>
+  <script>
+    /*
+      枚举属性，指将对象中的所有属性全部获取
+
+      for-in语句：
+        - 语法：
+            for (let key in object) {
+              语句...
+            }
+
+        - for-in的循环体会执行多次，有几个属性就会执行几次，每次执行时，都会将一个属性名赋值给我们所定义的变量
+
+        - 注意：并不是所有的属性都可以枚举，比如，使用的符号（symbol）添加的属性
+
+    */
+
+    let mySymbol = Symbol();
+
+    let obj = {
+      name: '孙悟空',
+      age: 18,
+      gender: '男',
+      address: '花果山',
+      // [mySymbol]: '特殊的符号'
+      [Symbol()]: '特殊的符号'
+    };
+
+    console.log(obj);
+
+    for (let key in obj) {
+      console.log(obj[key]);
+    }
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
