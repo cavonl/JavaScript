@@ -1,0 +1,50 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-09 16:08:09
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-09 16:38:10
+ * @FilePath: /JavaScript/05_对象/03_对象字面量.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>对象字面量</title>
+  <script>
+    /*
+      对象字面量
+        - 可以直接使用{}来创建对象
+        - 使用{}所创建的对象，可以直接向对象中添加属性
+        - 语法：
+            {
+              属性名: 属性值,
+              [属性名]: 属性值
+            }
+    */
+    let obj = new Object();
+
+    let mySymbol = Symbol();
+    let obj2 = {
+      name: '孙武了',
+      age: 18,
+      ['gender']: '男',
+      [mySymbol]: '特殊的属性',
+      hello: {
+        a: true,
+        b: 1
+      }
+    };
+
+    console.log(obj);
+    console.log(obj2);
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
