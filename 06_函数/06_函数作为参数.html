@@ -1,0 +1,49 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-10 21:38:42
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-10 21:54:04
+ * @FilePath: /JavaScript/06_函数/06_函数作为参数.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>函数作为参数</title>
+  <script>
+    /*
+      在js中，函数也是一个对象（一等函数），别的对象能做的事，函数也可以
+    */
+
+    function fn(a) {
+      // console.log('a = ', a);
+
+      // a();
+
+      console.log('a = ', a);
+    }
+
+    let obj = { name: '啊啊啊啊' };
+    function fn2() {
+      console.log('我是fn2');
+    }
+    // fn(fn2);
+
+    fn(function() {
+      console.log('我是匿名函数～');
+    });
+
+    fn(() => console.log('我是箭头函数'));
+
+
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
