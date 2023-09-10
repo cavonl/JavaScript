@@ -1,0 +1,49 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-10 20:36:51
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-10 20:48:20
+ * @FilePath: /JavaScript/06_函数/04_箭头函数的参数.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>箭头函数的参数</title>
+  <script>
+
+    const fn = (a, b) => {
+      console.log('a = ', a);
+      console.log('b = ', b);
+    }
+    fn(11, 110);
+
+    // 当箭头函数只有一个参数时，可以省略()
+    const fn2 = a => {
+      console.log('a = ', a);
+    }
+    fn2(220);
+
+    /*
+      1. 定义参数时，可以为参数指定默认值
+      2. 默认值，会在没有对应的实参时生效
+    */
+    const fn3 = (a = 10, b = 20, c = 30) => {
+      console.log('a = ', a);
+      console.log('b = ', b);
+      console.log('c = ', c);
+    }
+    // fn3(1, 2, 3);
+    fn3(1, 2);
+
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
