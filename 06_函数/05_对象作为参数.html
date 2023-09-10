@@ -1,0 +1,74 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-10 20:50:46
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-10 21:34:48
+ * @FilePath: /JavaScript/06_函数/05_对象作为参数.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>对象作为参数</title>
+  <script>
+
+    function fn(a) {
+      console.log('a = ', a);
+      console.log('a.name = ', a.name);
+
+      // 修改变量时，只会影响当前的变量
+      a = {};
+
+      // 修改对象时，如果有其他变量指向该对象，则所有指向该对象的变量都会受到影响
+      a.name = '猪八戒';
+      console.log('a = ', a);
+    }
+    // fn(1);
+
+    // 对象可以作为参数传递
+    let obj = { name: '孙悟空' };
+
+    // 传递实参时，传递并不是变量本身，而是变量中存储的值
+    fn(obj);
+
+    console.log(obj);
+
+    console.log('********华丽丽的分割线********');
+
+    // 函数每次调用，都会重新创建默认值
+    function fn2(a = { name: '闷头学' }) {
+      console.log('a = ', a);
+
+      a.name = '手机';
+      console.log('修改后的a = ', a);
+    }
+    fn2(); // 闷头学 手机
+    fn2(); // 闷头学 手机
+
+    console.log('********华丽丽的分割线********');
+
+    // 当声明了变量obj2作为a的对象时, 第一次调用没有受到影响，
+    // 当调用第二次的时候，之前的已经改了则会对后续的产生影响
+    let obj2 = { name: '啊阿啊阿啊阿' };
+    function fn3(a = obj2) {
+      console.log('a = ', a);
+
+      a.name = '嘻嘻嘻嘻嘻嘻';
+      console.log('修改后的a = ', a);
+    }
+
+    fn3(); // 啊阿啊阿啊阿 嘻嘻嘻嘻嘻嘻
+    fn3(); // 嘻嘻嘻嘻嘻嘻 嘻嘻嘻嘻嘻嘻
+
+
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
