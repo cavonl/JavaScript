@@ -1,0 +1,41 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-14 18:21:12
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-14 18:44:49
+ * @FilePath: /JavaScript/06_函数/08_箭头函数的返回值.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>箭头函数的返回值</title>
+  <script>
+    /*
+      箭头函数的返回值可以直接写在剪头后
+          如果直接在箭头后设置对象字面量为返回值时，对象字面量是必须用()括起来
+    */
+
+    // const sum = (a, b) => {
+    //   return a + b;
+    // }
+
+    const sum = (a, b) => a + b;
+    let result = sum(123, 456);
+    console.log('result = ', result);
+
+    const fn = () => { name: '孙悟空' }; // undefined
+    const fn2 = () => ({ name: '孙悟空' }); // {name: '孙悟空'}
+    let result1 = fn2();
+    console.log('result1 = ', result1);
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
