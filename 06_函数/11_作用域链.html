@@ -1,0 +1,51 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-16 15:25:57
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-16 15:37:48
+ * @FilePath: /JavaScript/06_函数/11_作用域链.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>作用域链</title>
+  <script>
+    /*
+      作用域链：
+        当我们使用一个变量时，JS解释器会优先在当前作用域中寻找变量
+            如果找到了，则直接使用
+            如果没找到，则去上一层作用域中寻找，找到了则使用
+            如果没找到，则继续去上一层寻找，以此类推……
+            如果一直到全局作用域都没找到，则报错 xxx is not defined
+    */
+
+    // let a = 10;
+
+    {
+      // a = 20;
+      // console.log(a);
+      {
+        // a = 30;
+        // console.log(a);
+      }
+    }
+
+    let b = 10;
+    function fn() {
+      b = 20;
+      // console.log(b);
+      function fn2() {
+        b = 39;
+        console.log(b);
+      }
+      fn2();
+    }
+    fn();
+  </script>
+</head>
+<body>
+  
+</body>
+</html>
