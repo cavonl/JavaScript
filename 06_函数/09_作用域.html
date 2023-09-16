@@ -1,0 +1,71 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-16 11:12:12
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-16 12:47:08
+ * @FilePath: /JavaScript/06_函数/09_作用域.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>作用域</title>
+  <script>
+    /*
+      作用域（scope）
+        - 作用域指的是一个变量的可见区域
+        - 作用域有两种：
+            1. 全局作用域
+                - 全局作用域在网页运行时创建，在网页关闭时销毁
+                - 所有直接编写到script标签中的代码都位于全局作用域中
+                - 全局作用域中的变量是全局变量，可以在任意位置访问
+            2. 局部作用域
+                - 块作用域
+                    - 块作用域是一种局部作用域
+                    - 块作用域在代码块执行时创建，代码块执行完毕时销毁
+                    - 在块作用域中声明的变量是局部变量，只能在块内部访问，外部无法访问
+    */
+    let a = '变量a';
+
+    {
+      let b = '哈哈哈';
+      {
+        console.log('b = ', b);
+        {
+          console.log('b = ', b);
+          {
+            console.log('b = ', b);
+          }
+        }
+      }
+    }
+    // console.log('b = ', b); // b is not defined
+
+    {
+      // a = '巴啦啦变量a';
+      {
+        a = '巴啦啦变量变量a';
+      }
+    }
+    console.log('a = ', a);
+
+
+    // fn函数位于script中，说明是全局作用域
+    function fn(params) {
+      // 在fn函数里面，说明是局部作用域
+      let c = '嘻嘻嘻';
+    }
+
+
+
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
