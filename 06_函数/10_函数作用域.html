@@ -1,0 +1,39 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-16 15:16:01
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-16 15:25:18
+ * @FilePath: /JavaScript/06_函数/10_函数作用域.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>函数作用域</title>
+  <script>
+    /*
+      函数作用域
+        - 函数作用域也是一种局部作用域
+        - 函数作用域在函数调用时产生，调用结束后销毁
+        - 函数每次调用都会产生一个全新的函数作用域
+        - 在函数中定义的变量是局部变量，只能在函数内部访问，外部无法访问
+    */
+
+    function fn(params) {
+      let a = 'fn中的变量a';
+      console.log(a);
+    }
+    // console.log(a); // a is not defined
+
+    fn();
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
