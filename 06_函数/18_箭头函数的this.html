@@ -1,0 +1,93 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-17 20:38:59
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-17 23:20:51
+ * @FilePath: /JavaScript/06_函数/18_箭头函数的this.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>箭头函数的this</title>
+  <script>
+    /*
+      箭头函数：
+        ([参数]) => 返回值
+        1. 箭头函数没有自己的this，它的this由外层作用域决定
+        2. 箭头函数的this和它的调用方式无关
+
+      例子：
+        无参箭头函数：() => 返回值
+        一个参数：a => 返回值
+        多个参数：(a, b) => 返回值
+
+        只有一个语句的参数：() => 返回值
+        只返回一个对象的函数：() => ({...})
+        有多行语句的函数：() => {
+          ...
+          return 返回值;
+        }
+
+      以函数形式调用，this是Window
+      以方法形式调用，this是调用它的对象
+      箭头函数是稳定输出，不会瞎变
+    */
+
+    function fn() {
+      console.log('fn -> ', this); // Window{...}
+    }
+    const fn2 = () => {
+      console.log('fn2 -> ', this); // Window{...}
+    }
+    fn();
+    fn2();
+
+
+
+    function fn3() {
+      console.log('fn -> ', this); // {name: '孙悟空', fn3: fn3(), fn4: () => {…}}
+    }
+
+    const fn4 = () => {
+      console.log('fn2 -> ', this); // Window{...}
+    }
+
+    const obj = {
+      name: '孙悟空',
+      fn3: fn3,
+      fn4: fn4,
+      // sayHello: function() {
+
+      // }
+      // 向对象中添加一个新的方法
+      sayHello() {
+        console.log(this.name); // 孙悟空
+        console.log(this); // {name: '孙悟空', fn3: ƒ, fn4: () => {…}, sayHello: ƒ}
+        function t() {
+          console.log('t -> ', this); // Window{...}
+        }
+        t(); // t是以函数形式调用的，所以它的this是Window
+
+
+        // 箭头函数由它的外层决定，也就是sayHello，所以打印的是对象obj
+        const t2 = () => {
+          console.log('t2 -> ', this);
+        }
+        t2(); // {name: '孙悟空', fn3: ƒ, fn4: () => {…}, sayHello: ƒ}
+      }
+    };
+
+    obj.fn3();
+    obj.fn4();
+    obj.sayHello(); // 以对象方法形式调用的，所以它的this是调用它的对象
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
