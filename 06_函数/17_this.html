@@ -1,0 +1,78 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-17 19:39:35
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-17 20:38:19
+ * @FilePath: /JavaScript/06_函数/17_this.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>this</title>
+  <script>
+    /*
+      this
+        - 函数在执行时，JS解析器每次都会传递一个隐含的参数
+        - 这个参数就叫做this
+        - this会指向一个对象
+           - this所指向的对象会根据函数调用方式的不同而不同
+              1. 以函数形式调用时，this指向的是window
+              2. 以方法的形式调用时，this指向的是调用方法的对象
+              ...
+
+    */
+
+    function fn() {
+      console.log(111);
+      // 以函数形式调用
+      console.log(this === window); // true
+      console.log('fn打印', this);
+    }
+    fn();
+
+
+    function fn2() {
+      console.log('fn2打印', this);
+
+      console.log(this === obj); // true
+    }
+    let obj = { name: '孙悟空' };
+    obj.test = fn2;
+
+    let obj2 = { name: '猪八戒', test: fn2 };
+
+    // obj.test();
+    // obj2.test();
+    // window.fn2();
+
+
+    const obj3 = {
+      name: '沙和尚',
+      sayHello: function () {
+        console.log('沙和尚');
+      }
+    };
+    const obj4 = {
+      // 当我改了name属性时，打印还是原始值，所有这样不方便，应该使用this.name
+      // name: '唐僧',
+      name: '唐僧111111',
+      sayHello: function () {
+        // console.log('唐僧');
+        console.log(this.name);
+      }
+    }
+    // 为两个对象添加一个方法，可以打印自己的名字
+    obj3.sayHello();
+    obj4.sayHello();
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
