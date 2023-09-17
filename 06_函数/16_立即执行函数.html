@@ -1,0 +1,83 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-17 19:05:11
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-17 19:38:04
+ * @FilePath: /JavaScript/06_函数/16_立即执行函数.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>立即执行函数</title>
+  <script>
+    /*
+      在开发中应该尽量减少直接在全局作用域中编写代码
+
+      所以我们的代码要尽量编写局部作用域
+
+      如果使用let声明的变量，可以使用{}来创建块作用域
+
+    */
+
+    // var 没有块作用域
+    // {
+    //   var a = 10;
+    // }
+    // {
+    //   var a = 20;
+    // }
+    // console.log(a); // 20
+
+    {
+      let a = 10
+    }
+    {
+      let a = 20;
+    }
+
+    // 但是var有函数作用域, 每次都需要调用才生效，不太方便
+    function fn() {
+      var a = 10;
+    }
+    fn();
+
+    function fn2() {
+      var a = 20;
+    }
+    fn2();
+
+    /**
+     * 希望可以创建一个只执行一次的匿名函数：
+     * function() { } 是一个匿名函数，由于开头是function解析器找不到所有会报错
+     * (function () { }) 套一个括号之后，就是左括号开头，解析器会直接找括号
+     * (function () { })() 因为一般函数都是名字+括号表示函数执行，所以在后面再加一个括号就是立即执行函数
+     * (function () { }()) 也可以这样写，函数调用的结构看起来更直观
+     *
+     * 立即执行函数（IIFE：Immediately-invoked function expression）
+     *    - 立即是一个匿名的函数，并且它只会调用一次
+     *    - 可以利用IIFE来创建一个一次性的函数作用域，避免变量冲突的问题
+     * 
+     * 注意：以及执行函数的后面需要加上分号隔开后面的代码
+     */
+    (function () {
+      console.log(111); // 111
+    }());
+
+    (function () {
+      console.log(222);
+    }());
+
+
+
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
