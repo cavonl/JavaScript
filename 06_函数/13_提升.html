@@ -1,0 +1,59 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-16 17:07:12
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-17 11:15:22
+ * @FilePath: /JavaScript/06_函数/13_提升.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>提升</title>
+  <script>
+    /*
+      变量的提升
+        - 使用var声明的变量，它会在所有代码执行前被声明，所以我们可以在变量声明前就访问变量
+
+      函数的提升
+        - 使用函数声明创建的函数，会在其他代码执行前被创建，所以我们可以在函数声明前调用函数
+
+      let 声明的变量实际也会提升，但是在赋值之前解析器禁止对该变量的访问
+    */
+
+    // console.log(a); //  a is not defined
+    // a = 10;
+
+
+    console.log(a); // undefined
+    var a = 10;
+
+
+    fn(); // 必须以function创建的函数才会被提升，其他都不可以
+    function fn() {
+      alert('我是fn函数');
+    }
+
+
+    // fn2(); // fn2 is not a function
+    // var fn2 = function () {}
+
+
+    // console.log(b); //  Cannot access 'b' before initialization
+    // let b = '孙悟空';
+
+    console.log(b); // b is not defined
+    b = '猪八戒';
+
+
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
