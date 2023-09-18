@@ -1,0 +1,67 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-18 17:25:58
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-18 18:26:55
+ * @FilePath: /JavaScript/07_面向对象/03_属性.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>属性</title>
+  <script>
+    /*
+      类是创建对象的模板，要创建的第一件事就是定义类
+    */
+
+    class Person {
+
+      /*
+        类的代码块，默认就是严格模式
+            类的代码块是用来设置对象的属性，不是什么代码都能写
+      */
+
+      name = '孙悟空'; // Person的实例属性name p1.name
+      age = 18;     // 实例属性只能通过实例访问 p1.age
+
+      static test = 'test静态属性'; // 使用static声明的属性，是静态属性（类属性） Person.test
+      static hh = ' hh静态属性'; // 静态属性只能通过类去访问  Person.hh
+    }
+
+    const p1 = new Person();
+    const p2 = new Person();
+
+    console.log(p1);
+    console.log(p2);
+
+    // 实例访问
+    console.log(p1.hh); // undefined
+    // 类访问
+    console.log(Person.hh); // hh静态属性
+
+
+
+
+    // 并没有体现出模板的作用
+    // const p1 = new Person();
+    // p1.name = '孙悟空';
+    // p1.age = 18;
+    // console.log(p1);
+
+    // const p2 = new Person();
+    // p2.name = '猪八戒';
+    // p2.age = 28;
+    // console.log(p2);
+
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
