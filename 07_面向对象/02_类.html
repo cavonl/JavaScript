@@ -1,0 +1,91 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-18 15:13:52
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-18 17:22:43
+ * @FilePath: /JavaScript/07_面向对象/02_类.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>类</title>
+  <script>
+    /*
+      使用Object创建对象的问题：
+        1. 无法区分出不同类型的对象
+        2. 不方便批量创建对象
+
+      在JS中可以通过类（class）来解决这个问题：
+        1. 类是对象模板，可以将对象中的属性和方法直接定义在类中，
+           定义后，就可以直接通过类来创建对象
+        2. 通过同一个类创建的对象，我们称为同类对象，
+           可以使用 instanceof 来检查一个对象是否是由某个类创建
+           如果某个对象是由某个类所创建，则我们称该对象是这个类的实例
+
+      语法：
+        class 类名 {} // 类名要使用大驼峰命名
+        const 类名 = class {}
+    */
+
+    const chenlei = {
+      // 添加对象
+      name: '陈磊',
+      age: 33,
+      height: 175,
+      weight: 138,
+
+      // 添加方法
+      sleep() {
+        console.log(this.name + '睡觉啦～');
+      },
+      eat() {
+        console.log(this.name + '吃饭啦～');
+      }
+    }
+
+    const cat = {
+      name: '黑猫警长',
+      age: 5,
+      sleep() {
+        console.log(this.name + '睡觉啦～');
+      },
+      eat() {
+        console.log(this.name + '吃饭啦～');
+      }
+    }
+
+    console.log(chenlei);
+    console.log(cat);
+
+    // Person类专门用来创建人的对象
+    class Person {
+
+    }
+
+    // Cat类专门用来创建猫的对象
+    class Cat {
+
+    }
+
+    const p1 = new Person(); // 调用构造函数创建对象
+    const p2 = new Person();
+
+    const c1 = new Cat();
+    const c2 = new Cat();
+
+    console.log('p1 instanceof Person: ', p1 instanceof Person); // true
+    console.log('p2 instanceof Cat: ', p2 instanceof Cat); // false
+
+    console.log(p1);
+    console.log(c1);
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
