@@ -1,0 +1,74 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-24 17:11:42
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-24 19:10:59
+ * @FilePath: /JavaScript/07_面向对象/09_继承.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>继承</title>
+  <script>
+
+    /*
+      继承
+        - 通过继承可以在不修改一个类的情况下对其进行扩展
+        - OCP 开放原则：程序应该对修改关闭，对扩展开放
+    */
+
+    class Animal {
+      constructor(name) {
+        this.name = name;
+      }
+
+      sayHello() {
+        console.log(this.name + '动物在叫～');
+      }
+    }
+
+    class Dog extends Animal {
+      // 在子类中，可以通过创建同名方法，来重写父类的方法
+      sayHello() { // 重写
+        console.log(this.name + '汪汪汪～');
+      }
+    }
+    class Cat extends Animal {
+
+      // 重写构造函数
+      constructor(name, age) {
+        // 重写构造函数时，构造函数的第一行代码必须为super()
+        super(name); // 调用父类的构造函数
+        this.age = age;
+        
+      }
+
+
+      sayHello() {
+        // 调用父类的sayHello方法
+        super.sayHello(); // 在方法中可以使用super来引用父类的方法
+        console.log(this.name + '喵喵喵～');
+      }
+    }
+    class Snake extends Animal { }
+
+    const dog = new Dog('旺财');
+    const cat = new Cat('汤姆', 3);
+
+    dog.sayHello();
+    cat.sayHello();
+
+    console.log(dog);
+    console.log(cat);
+  </script>
+
+</head>
+
+<body>
+
+</body>
+
+</html>
