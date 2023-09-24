@@ -1,0 +1,71 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-24 19:23:42
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-24 20:11:45
+ * @FilePath: /JavaScript/07_面向对象/10_对象的结构.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>对象的结构</title>
+  <script>
+    /*
+      对象中存储属性的区域实际有两个
+        1. 对象自身
+          - 直接通过对象所添加的属性，位于对象自身中
+              ① p.address = '花果山';
+              ② this.gender = '男';
+          - 在类中通过 x = y 的形式添加的属性，位于对象自身中
+              ① name = '孙悟空';
+              ② fn = () => {}
+
+        2. 神秘位置？ --› 原型对象（prototype）
+          - 对象中还有一些内容，会存储到 其他的对象里（原型对象）
+          - 在对象中会有一个属性用来存储原型对象，这个属性叫做__proto__
+          - 原型对象也负责为对象存储属性，
+              当我们访问对象中的属性时，会优先访问对象自身的属性；
+              对象自身不包含该属性时，才会去原型对象中寻找
+          - 会添加到原型对象中情况：
+              ① 在类中通过 xxx() {} 方式添加的方法，位于原型中
+              ② 主动向原型中添加的属性或方法
+
+    */
+
+    class Person {
+      name = '孙悟空';
+      age = 18;
+
+      constructor() {
+        this.gender = '男';
+      }
+
+      // 方法这样写，控制台里面没显示，因为存储到原型对象中了
+      sayHello() {
+        console.log('hello, 我是' + this.name);
+      }
+
+      // 方法这样写，控制台里面有显示，因为存储到对象自身中了
+      sayHello2 = () => {
+        console.log('hello, 我是' + this.name);
+      }
+    }
+
+    const p = new Person();
+
+    p.address = '花果山';
+
+    // 当原型对象里面有相同的方法时，会优先使用对象自身中的方法
+    p.sayHello = 'hello'; // 所以会打印hello
+    console.log(p);
+  </script>
+</head>
+
+<body>
+  <img src="./images/ObjectItSelfAndPrototypeObject.png" alt="" srcset="" width="500">
+</body>
+
+</html>
