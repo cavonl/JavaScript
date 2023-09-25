@@ -1,0 +1,89 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-25 17:25:06
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-25 20:15:21
+ * @FilePath: /JavaScript/07_面向对象/13_修改原型.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>修改原型</title>
+  <script>
+    /*
+      大部分情况下，我们是不需要修改原型对象
+        注意：
+          1. 通过一个对象影响所有同类对象，这么做不合适
+          2. 修改原型先得创建实例，麻烦
+          3. 危险
+
+      除了通过__proto__能访问对象的原型外，还可以通过类的prototype属性，来访问实例的原型
+        修改原型时，最好通过类去修改
+        好处：
+          1. 一修改就是修改所有的实例原型
+          2. 无需创建实例即可完成对类的修改
+
+      原则：
+        1. 原型尽量不要手动改
+        2. 要改也不要通过实例对象去改
+        3. 通过 类.prototype 属性去修改
+        4. 最好不要直接给prototype去赋值
+    */
+
+    class Person {
+      name = '孙悟空';
+      age = 18;
+
+      sayHello() {
+        console.log('Hello, 我是' + this.name);
+      }
+    }
+
+    class Dog { }
+
+    // 最好在类定义完了之后就进行修改
+    Person.prototype.fly = () => {
+      console.log('我在飞～');
+    }
+
+    const person = new Person();
+    const person2 = new Person();
+    console.log(person);
+    console.log(person2);
+
+    // 通过对象修改原型，向原型中添加方法，修改后所有同类实例都能访问该方法  不要这么做
+    // person.__proto__.run = () => {
+    //   console.log('我在跑～');
+
+    // }
+
+    // person.run();
+    // person2.run();
+
+    // person.__proto__ = new Dog(); // 直接为对象赋值了一个新的原型  不要这么做
+
+
+    // Person.prototype访问Person实例的原型对象
+    // console.log(Person.prototype === person.__proto__); // true
+
+    // Person.prototype.fly = () => {
+    //   console.log('我在飞～');
+    // }
+
+    person.fly();
+    person2.fly();
+
+
+
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
