@@ -1,0 +1,76 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-24 20:13:25
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-25 13:11:35
+ * @FilePath: /JavaScript/07_面向对象/11_原型对象.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>原型对象</title>
+  <script>
+    /*
+      
+    */
+
+    class Person {
+      name = '孙悟空';
+      age = 18;
+
+      sayHello() {
+        console.log('Hello, 我是' + this.name);
+      }
+    }
+
+    const p = new Person();
+    /*
+      访问一个对象的原型对象
+        1. 对象.__proto__
+            - 注意：不要 对象.__proto__ = xxx 这样赋值
+        2. Object.getPrototypeOf(对象)
+            - 相对来说安全一点
+
+      原型对象中的数据：
+        1. 对象中的数据（属性、方法等）
+        2. constructor（对象的构造函数）
+
+      注意：
+        原型对象也有原型，这样就构成了一条原型链，根据对象的复杂程度不同，原型链的长度也不同
+          比如：
+            p对象的原型链：p对象 --› 原型 --› 原型 --› null
+            obj对象的原型链：obj对象 --› 原型 --› null
+
+        原型链：
+          - 读取对象属性时，会优先对象自身属性
+              如果对象中有，则使用，没有则去对象的原型中寻找
+              如果原型中有，则使用，没有则去原型的原型中寻找
+              直到找到Object对象的原型（Object的原型没有原型（为null）），
+              // 直到找到Object对象的原型为null，才会停止寻找，
+              如果依然没有找到，则返回undefined
+
+          - 作用域链，是找变量的链，找不到会报错
+          - 原型链，是找属性的链，找不到会返回undefined
+    */
+    console.log(p.__proto__);
+    console.log(p.__proto__.constructor);
+    console.log(p.constructor);
+    console.log(Object.getPrototypeOf(p) === p.__proto__); // true
+
+    console.log(p.__proto__.__proto__);
+    console.log(p.__proto__.__proto__.__proto__); // null
+
+    const obj = {};
+    console.log(obj.__proto__);
+    console.log(obj.__proto__.__proto__); // null
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
