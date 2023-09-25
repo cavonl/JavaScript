@@ -1,0 +1,110 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-25 13:15:43
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-25 14:52:13
+ * @FilePath: /JavaScript/07_面向对象/images/12_原型的作用.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>原型的作用</title>
+  <script>
+    class Person {
+      name = '孙悟空';
+      age = 18;
+
+      sayHello() {
+        console.log('Hello，我是' + this.name);
+      }
+    }
+
+    class Dog {
+
+    }
+
+    const p = new Person();
+    const p2 = new Person();
+
+    /*
+      所有的同类型对象它们的原型对象都是同一个，也就意味着，同类型对象的原型链是一样的
+
+      原型的作用：
+        - 原型就相当于是一个公共的区域，可以被所有该类实例访问，
+          可以将该类实例中所有的公共属性（方法）统一存储到原型中，
+          这样我们只创建一个属性，即可被所有实例访问
+
+        - JS中继承就是通过原型来实现的，也叫原型继承
+            当继承时，子类的原型就是父类的实例
+
+      在对象中有些值是独有的，像属性（name，age，gender）每个对象都应该有自己的值，
+        但是有些值对于每个对象来说都是一样的，像各种方法，对于一样的值没必须重复创建
+
+      尝试：
+        函数的原型链是什么样子的？
+        Object的原型链是什么样子的？
+    */
+    console.log(p);
+    console.log(p2);
+    console.log(p === p2); // false
+    console.log(p.__proto__ === p2.__proto__); // true
+
+    // 问题：当有100个对象，99个对象都一样，只有一个对象的方法不一样，该怎么解决？
+    p.sayHello = 'hello';
+    console.log(p.sayHello); // hello
+    console.log(p2.sayHello); // ƒ sayHello() {console.log('Hello，我是' + this.name);}
+
+    // 同类型对象它们的原型对象都是同一个
+    const d = new Dog();
+    const d2 = new Dog();
+    console.log(d.__proto__ === d2.__proto__); // true
+
+    console.log('分割线******************************');
+
+    class Animal {
+
+    }
+
+    class Cat extends Animal {
+
+    }
+
+    class TomCat extends Cat {
+
+    }
+
+    // Cat --› Animal实例 --› object --› object原型 --› null
+    const cat = new Cat();
+    console.log(cat); // cat
+    console.log(cat.__proto__); // Animal
+    console.log(cat.__proto__.__proto__); // object
+    console.log(cat.__proto__.__proto__.__proto__); // object原型
+    console.log(cat.__proto__.__proto__.__proto__.__proto__); // null
+
+    const tomCat = new TomCat();
+    // TomCat --› Cat --› Animal实例 --› object --› object原型 --› null  原型链被拉长
+    console.log(tomCat.__proto__.__proto__.__proto__.__proto__.__proto__);
+
+    const obj = {
+      name: '11'
+    }
+    // obj --› object原型 --› null
+    console.log(obj.__proto__.__proto__);
+
+    function fn() {
+      console.log(11);
+    }
+    // fn --› ƒ () { [native code] } --› object原型 --› null
+    console.log(fn.__proto__.__proto__.__proto__);
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
