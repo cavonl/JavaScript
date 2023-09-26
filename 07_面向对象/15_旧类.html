@@ -1,0 +1,119 @@
+<!--
+ * @Author: chengfun 425247833@qq.com
+ * @Date: 2023-09-26 07:50:42
+ * @LastEditors: chengfun 425247833@qq.com
+ * @LastEditTime: 2023-09-26 10:44:22
+ * @FilePath: /JavaScript/07_面向对象/15_旧类.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>旧类</title>
+  <script>
+
+    /*
+        早期JS中，直接通过函数来定义类
+          - 一个函数如果直接调用 xxx() ，那么这个函数就是一个普通函数
+          - 一个函数如果通过new调用，new xxx()，那么这个函数就是一个构造函数
+
+        等价于：
+          class Person { }
+     */
+
+    // function Person(name, age) {
+    //   // 在构造函数中，this表示新建的对象
+    //   this.name = name;
+    //   this.age = age;
+
+    //   // 这样添加方法会添加到对象自身里
+    //   // this.sayHello = function() {
+    //   //   console.log(this.name);
+    //   // }
+    // }
+
+    // // 向原型中添加属性（方法）
+    // Person.prototype.sayHello = function () {
+    //   console.log(this.name);
+    // }
+
+    // // 静态属性
+    // Person.staticProperty = 'xxx';
+    // // 静态方法
+    // Person.staticProperty = function () { }
+
+    // 将分散的旧类放在立即执行函数里，方便管理
+    var Person = (function () {
+      function Person(name, age) {
+        // 在构造函数中，this表示新建的对象
+        this.name = name;
+        this.age = age;
+
+        // 这样添加方法会添加到对象自身里
+        // this.sayHello = function() {
+        //   console.log(this.name);
+        // }
+      }
+
+      // 向原型中添加属性（方法）
+      Person.prototype.sayHello = function () {
+        console.log(this.name);
+      }
+
+      // 静态属性
+      Person.staticProperty = 'xxx';
+      // 静态方法
+      Person.staticMethod = function () { }
+
+      // 但是记得把类返回出去
+      return Person;
+    })();
+
+    const person = new Person('孙悟空', 18);
+    console.log(person);
+
+    console.log(Person.staticProperty); // xxx
+    console.log(Person.staticMethod); // ƒ () { }
+
+    // class MyClass { }
+    // // MyClass(); // 报错
+    // new MyClass();
+
+
+    var Animal = (function () {
+      function Animal() {
+
+      }
+
+      return Animal;
+    })();
+
+    var Cat = (function () {
+      function Cat() {
+
+      }
+
+      // 继承 Animal
+      Cat.prototype = new Animal();
+
+      return Cat;
+
+    })();
+
+    const cat = new Cat();
+    console.log(cat);
+
+    console.log(cat instanceof Animal); // true
+
+
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
