@@ -1,0 +1,83 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-09-26 21:09:34
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-09-26 21:44:58
+ * @FilePath: /JavaScript/08_数组/02_遍历数组.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>遍历数组</title>
+  <script>
+
+    // 任何类型的值都可以成为数组中的元素
+    let arr = [1, 'hello', true, null, undefined, { name: '孙悟空' }, () => { }];
+
+    // 创建数组时尽量要确保数组中存储的数据的类型是相同的
+    arr = ['孙悟空', '猪八戒', '沙和尚'];
+
+    console.log(arr);
+
+    /*
+        遍历数组
+          - 遍历数组简单理解，就是获取到数组中的每一个元素
+    */
+
+    console.log(arr[0]);
+    console.log(arr[1]);
+    console.log(arr[2]);
+
+    // for (let i = 0; i < 3; i++) {
+    //   console.log(arr[i]);
+    // }
+
+    arr = ['孙悟空', '猪八戒', '沙和尚', '唐僧'];
+
+    for (let i = 0; i < arr.length; i++) {
+      console.log(arr[i]);
+    }
+    console.log(arr.length); // 4
+    console.log(arr.length - 1); // 3
+
+    // 倒序
+    for (let i = arr.length - 1; i >= 0; i--) {
+      console.log(arr[i]);
+    }
+
+    /*
+      定义一个Person类，类中有两个属性name和age，然后创建几个Person对象，将其添加到一个数组中
+      遍历数组，并打印未成年人的信息
+    */
+
+    class Person {
+      constructor(name, age) {
+        this.name = name;
+        this.age = age;
+      }
+    }
+
+    const personArr = [
+      new Person('孙悟空', 18),
+      new Person('猪八戒', 28),
+      new Person('红孩儿', 8)
+    ];
+
+    console.log(personArr);
+
+    for (let i = 0; i < personArr.length; i++) {
+      if (personArr[i].age < 18) {
+        console.log(personArr[i]);
+      }
+    }
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
