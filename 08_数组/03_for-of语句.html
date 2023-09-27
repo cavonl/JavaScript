@@ -1,0 +1,43 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-09-26 21:46:03
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-09-27 08:20:11
+ * @FilePath: /JavaScript/08_数组/03_for-of语句.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>for-of语句</title>
+  <script>
+    /*
+        for-of 语句可以用来遍历可迭代的对象
+          语法：
+            for (变量 of 可迭代的对象) {
+              语句...
+            }
+
+        执行流程：
+          for-of的循环体会执行多次，数组中有几个元素就会执行几次
+            每次执行时都会将一个元素赋值给变量
+    */
+
+    let arr = ['孙悟空', '猪八戒', '沙和尚', '唐僧'];
+    for (let value of arr) {
+      console.log(value);
+    }
+
+    for (let value of arr) {
+      console.log(value);
+    }
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
