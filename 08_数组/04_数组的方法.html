@@ -1,0 +1,56 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-09-27 08:23:22
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-09-27 08:53:53
+ * @FilePath: /JavaScript/08_数组/04_数组的方法.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数组的方法</title>
+  <script>
+    /*
+        https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+        Array.isArray()
+          - 用来检查一个对象是否是数组
+
+        Array.at()
+          - 可以根据索引获取数组中的指定元素
+          - at可以接收负索引作为参数
+
+        Array.concat()
+          - 用来连接两个或多个数组
+          - 非破坏性方法，不会影响原数组，而是返回一个新的数组
+     */
+
+    console.log(Array.isArray({ name: '孙悟空' })); // false
+    console.log(Array.isArray([1, 2, 3])); // true
+
+    let arr = ['孙悟空', '猪八戒', '沙和尚', '唐僧'];
+    console.log(arr.at(-2)); // 沙和尚
+    console.log(arr.at(2)); // 沙和尚
+    console.log(arr.at()); // 孙悟空 默认索引为0的值
+    console.log(arr[arr.length - 1]); // 唐僧
+    console.log(arr[arr.length - 2]); // 沙和尚
+
+    let arr2 = ['白骨精', '蜘蛛精', '玉兔精'];
+
+    console.log(arr.concat(arr2)); // ['孙悟空', '猪八戒', '沙和尚', '唐僧', '白骨精', '蜘蛛精', '玉兔精']
+    console.log(arr.concat(arr2, '牛魔王', '铁扇公主')); // ['孙悟空', '猪八戒', '沙和尚', '唐僧', '白骨精', '蜘蛛精', '玉兔精', '牛魔王', '铁扇公主']
+
+    console.log(arr); // ['孙悟空', '猪八戒', '沙和尚', '唐僧']
+    console.log(arr2); // ['白骨精', '蜘蛛精', '玉兔精']
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
