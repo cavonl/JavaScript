@@ -1,0 +1,43 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-09-28 15:16:50
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-09-28 19:54:07
+ * @FilePath: /JavaScript/08_数组/06_对象的复制.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>对象的复制</title>
+  <script>
+
+    let arr = ['孙悟空', '猪八戒', '沙和尚'];
+
+    // 如何去复制一个对象
+    // let arr2 = arr; // 不是复制，只是共用了同一个内存地址
+    // arr2[0] = '唐僧'; // 这时候arr、arr2 都是一样的
+    // console.log(arr);
+    // console.log(arr2);
+    // console.log(arr === arr2); // true
+
+
+    // 如何去复制一个对象，复制必须要产生新的对象
+    // 当调用slice时，会产生一个新的数组对象，从而完成对数组的复制
+    let arr3 = arr.slice();
+
+    console.log(arr);
+    console.log(arr3);
+    console.log(arr === arr3); // false
+
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
