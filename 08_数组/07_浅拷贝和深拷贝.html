@@ -1,0 +1,65 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-09-28 20:16:01
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-09-29 13:47:47
+ * @FilePath: /JavaScript/08_数组/07_浅拷贝.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>浅拷贝</title>
+  <script>
+    /*
+        浅拷贝（shallow copy）
+          - 通过对对象的拷贝都是浅拷贝
+          - 浅拷贝顾名思义，只对对象的浅层进行复制（只复制一层）
+          - 如果对象中存储的数据是原始值，那么拷贝的深浅是不重要的
+          - 浅拷贝只会对对象本身进行复制，不会复制对象中的属性（或元素）
+
+        深拷贝（deep copy）
+          - 深拷贝只不仅复制对象本身，还复制对象中的属性和元素
+          - 因为性能问题，通常情况下不太使用深拷贝
+     */
+
+    let arr = [{ name: '孙悟空' }, { name: '猪八戒' }];
+    let arr2 = arr.slice(); // 浅拷贝
+
+    console.log(arr);
+    console.log(arr2);
+    console.log(arr === arr2); // false
+    console.log(arr[0] === arr2[0]); // true
+
+    arr2[0].name = '唐僧';
+    // 因为只复制了一层，里面的共用内存，所以改一个另一个也会改
+    console.log(arr); // [{ name: '唐僧' }, { name: '猪八戒' }]
+    console.log(arr2); // [{ name: '唐僧' }, { name: '猪八戒' }]
+
+
+    let arr3 = structuredClone(arr); // 专门用来深拷贝的方法
+    console.log(arr === arr3); // false
+    console.log(arr[0] === arr3[0]); // false
+    console.log(arr[0].name === arr3[0].name); // true
+    arr[0].name = '哈哈哈';
+    console.log(arr[0].name); // 哈哈哈
+    console.log(arr2[0].name); // 哈哈哈
+    console.log(arr3[0].name); // 唐僧
+
+    console.log(arr);
+    console.log(arr3);
+
+  </script>
+</head>
+
+<body>
+  <img src="./images/数组内存.jpg" alt="数组内存" srcset="" width="800">
+  <hr width="800" align="left">
+  <img src="./images/浅拷贝.jpg" alt="浅拷贝" srcset="" width="800">
+  <hr width="800" align="left">
+  <img src="./images/深拷贝.jpg" alt="深拷贝" srcset="" width="800">
+</body>
+
+</html>
