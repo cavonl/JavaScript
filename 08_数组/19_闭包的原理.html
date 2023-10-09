@@ -1,0 +1,63 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-10-08 20:23:23
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-10-09 14:01:59
+ * @FilePath: /JavaScript/08_数组/19_闭包的原理.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>闭包的原理</title>
+  <script>
+
+    let a = '全局变量a';
+
+    /*
+        函数作用域，在函数创建时就已经确定的（词法作用域），和调用的位置无关
+
+        闭包利用的就是此法作用域
+     */
+
+    function fn() {
+      console.log(a);
+    }
+
+    function fn2() {
+      let a = 'fn2中的变量a';
+      // console.log(a);
+
+      fn();
+    }
+
+    fn2();
+
+    // function fn3() {
+    //   let a = 'fn3中的a';
+    //   function fn4() {
+    //     console.log(a);
+    //   }
+    //   fn4();
+    // }
+    // fn3(); // fn3中的a
+
+    function fn3() {
+      let a = 'fn3中的a';
+      function fn4() {
+        console.log(a);
+      }
+      return fn4;
+    }
+    let fn4 = fn3();
+    fn4(); // fn3中的a
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
