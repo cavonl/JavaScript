@@ -1,0 +1,42 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-10-11 16:53:05
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-10-11 17:16:08
+ * @FilePath: /JavaScript/08_数组/22_递归练习.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>递归练习</title>
+  <script>
+    /*
+        一个兔子出生后，两个月后每个月都能生一对兔子，
+          编写一个函数，可以用来计算第n个月的兔子的数量
+
+        1   2   3   4   5   6   7   8   9   10   11   12
+        1   1   2   3   5   8   13  21  34  55   89   144
+        - 规律：当前数等于前两数之和（斐波那契数列）
+     */
+
+    function fibonacci(n) {
+      // 基线条件
+      if (n < 3) { // n <= 2
+        return 1;
+      }
+      // 递归条件
+      // n = 前第一个数 + 前第二个数 ——› n = (n - 1) + (n - 2)
+      return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+    console.log(fibonacci(12));
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
