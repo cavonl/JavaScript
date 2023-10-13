@@ -1,0 +1,104 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-10-13 20:19:45
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-10-13 21:43:14
+ * @FilePath: /JavaScript/08_数组/25_bind.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>bind</title>
+  <script>
+    /*
+
+        根据函数调用方式的不同，this的值也不同：
+          1. 以函数形式调用，this是window
+          2. 以方法形式调用，this是调用方法的对象
+          3. 构造函数中，this是新建的对象
+          4. 箭头函数没有 自己的this，由外层作用域决定
+          5. 通过call 和 apply调用的函数，他们的第一个参数就是函数的this
+          6. 通过bind返回的函数，this有bind第一个参数决定（无法修改）
+
+        bind() 是函数的方法，可以用来创建一个新的函数
+          - bind可以为新函数绑定this
+          - bind可以为新函数绑定参数
+
+        箭头函数
+          - 没有自身的this，它的this由外层作用域决定，也无法通过 call、apply和bind修改它的this
+          - 箭头函数中没有arguments
+     */
+
+    function fn() {
+      console.log('fn函数执行了！', this);
+    }
+    // fn.call(); // fn函数执行了！ Window{...}
+    // fn.bind(); // （这样调没有反应）
+
+    let newBindFn = fn.bind();
+    newBindFn(); // fn函数执行了！ Window{...}
+
+    const obj = { name: '孙悟空' };
+    let newBindFn2 = fn.bind(obj);
+    newBindFn2(); // fn函数执行了！ {name: '孙悟空'}
+    newBindFn2.call({}); // fn函数执行了！ {name: '孙悟空'}
+
+
+    function fn2(a, b, c) {
+      console.log(a, b, c);
+    }
+
+    let newFn2 = fn2.bind(obj);
+    newFn2(); // undefined undefined undefined
+    newFn2(1, 2, 3); // 1 2 3
+
+    newFn2 = fn2.bind(obj, 10); // 10是固定值
+    newFn2(20, 30); // 10 20 30
+
+    newFn2 = fn2.bind(obj, 10, 20, 30); // 10, 20, 30是固定值
+    newFn2(50, 60, 70); // 10 20 30
+
+
+    const arrowFn = () => {
+      console.log(this);
+    };
+    arrowFn(); // Window{...}
+    arrowFn.call(obj); // Window{...}
+    arrowFn.apply(obj); // Window{...}
+
+    // let newArrowFn = arrowFn.bind(obj);
+    let newArrowFn = arrowFn.bind();
+    newArrowFn(); // Window{...}
+
+    const arrowFn2 = () => {
+      console.log(arguments);
+    };
+    // arrowFn2(); // Uncaught ReferenceError: arguments is not defined
+
+
+    class MyClass {
+      fn = () => {
+        console.log(this);
+      }
+    }
+    let mc = new MyClass();
+    mc.fn(); // MyClass {fn: ƒ}
+    mc.fn.call(); // MyClass {fn: ƒ}
+    mc.fn.call(window); // MyClass {fn: ƒ}
+    mc.fn.apply(window); // MyClass {fn: ƒ}
+    let newMC = mc.fn.bind();
+    newMC(); // MyClass {fn: ƒ}
+
+
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
