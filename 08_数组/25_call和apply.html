@@ -1,0 +1,71 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-10-13 18:17:30
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-10-13 20:17:15
+ * @FilePath: /JavaScript/08_数组/25_call和apply.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>call和apply</title>
+  <script>
+    /*
+        根据函数调用方式的不同，this的值也不同：
+          1. 以函数形式调用，this是window
+          2. 以方法形式调用，this是调用方法的对象
+          3. 构造函数中，this是新建的对象
+          4. 箭头函数没有 自己的this，由外层作用域决定
+          5. 通过call 和 apply调用的函数，他们的第一个参数就是函数的this
+     */
+    function fn() {
+      console.log('fn函数调用了：', this);
+    }
+    let obj = { name: '孙悟空', fn };
+    // obj.fn(); // {name: '孙悟空', fn: ƒ}
+
+    /*
+        调用函数除了通过 函数() 这种形式外，还可以通过其他的方式来调用函数
+          比如：我们可以通过调用函数的call()和apply()两个方法来调用函数
+            函数.call()
+            函数.apply()
+            - call 和 apply 除了可以调用函数，还可以用来指定函数中的this
+            - call 和 apply 的第一个参数，将会成为函数的this
+            - 通过call方法调用函数，函数的实参直接在第一个参数后一个一个的列出来
+            - 通过apply方法调用函数，函数的实参需要通过一个数组传递
+     */
+    // fn.call(); // Window{...}
+    // fn.apply(); // Window{...}
+    fn.call(obj); // {name: '孙悟空', fn: ƒ}
+    fn.apply(console); // {debug: ƒ, error: ƒ, info: ƒ, log: ƒ, warn: ƒ, …}
+
+
+    function fn2(a, b) {
+      console.log('a = ', a, 'b = ', b, this);
+    }
+    fn2(123, 456); // a = 123 b = 456 Window{...}
+    fn2.call(obj); // a = undefined b = undefined {name: '孙悟空', fn: ƒ}
+    fn2.call(123, 456, 124); // a = 456 b = 124 Number {123}
+    fn2.call('hello', true, 124); // a = true b = 124 String {'hello'}
+    fn2.call(null, true, 124); // a = true b = 124 Window{...}
+    fn2.call(obj, '嘻嘻', [1, 2]); // a = 嘻嘻 b = [1, 2] {name: '孙悟空', fn: ƒ}
+    fn2.call([{ name: 'cl' }, { name: 'cy' }], 123, false); // a = 123 b = false [{… }, {… }]
+
+    fn2.apply(obj); // a = undefined b = undefined { name: '孙悟空', fn: ƒ }
+    // fn2.apply(obj, 123); // Uncaught TypeError: CreateListFromArrayLike called on non-object
+    fn2.apply(obj, [123]); // a = 123 b = undefined { name: '孙悟空', fn: ƒ }
+    fn2.apply(obj, [123, true, 'hello']); // a = 123 b = true { name: '孙悟空', fn: ƒ }
+    fn2.apply(obj, [123, '哈啊哈']); // a = 123 b = 哈啊哈 { name: '孙悟空', fn: ƒ }
+
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
