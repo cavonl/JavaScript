@@ -1,0 +1,55 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-10-14 17:03:15
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-10-14 17:31:50
+ * @FilePath: /JavaScript/09_内建对象/02_对象的解构赋值.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>对象的解构赋值</title>
+  <script>
+    let obj = { name: '孙悟空', age: 18, gender: '男' };
+
+    // let name = obj.name;
+    // let age = obj.age;
+    // let gender = obj.gender;
+    // console.log(name, age, gender); // 孙悟空 18 男
+
+    // let { name, age, gender } = obj; // 声明变量同时结构对象
+    // console.log(name, age, gender); // 孙悟空 18 男
+
+    let name, age, gender;
+    // {name, age, gender} = obj;
+    // console.log(name, age, gender); // Uncaught SyntaxError: Unexpected token '='
+    ({ name, age, gender } = obj);
+    console.log(name, age, gender); // 孙悟空 18 男
+
+
+    let { address } = obj;
+    console.log(address); // undefined（没有属性返回undefined）
+
+    // 别名
+    // let { name: a, age: b, gender: c} = obj;
+    // console.log(a, b, c); // 孙悟空 18 男
+
+    // 默认值
+    // let { name: a, age: b, gender: c, addre = '花果山' } = obj;
+    // console.log(a, b, c, addre); // 孙悟空 18 男 花果山
+
+    // 别名 + 默认值
+    let { name: a, age: b, gender: c, address: d = '花果山' } = obj;
+    console.log(a, b, c, d); // 孙悟空 18 男 花果山
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
