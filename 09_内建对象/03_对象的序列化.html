@@ -1,0 +1,88 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-10-14 17:34:42
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-10-14 21:21:59
+ * @FilePath: /JavaScript/09_内建对象/03_对象的序列化.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>对象的序列化</title>
+  <script>
+    /*
+        对象的序列化
+          - JS中的对象使用时都是存在于计算机的内存中的
+          - 序列化指将对象转换为一个可以存储的格式，在JS中对象的序列化通常是将一个对象转换为字符串（JSON字符串）
+          - 序列化的用途（对象转换为字符串有什么用？）
+            - 对象转换为字符串后，可以将字符串在不同的语言之间进行传递，
+                甚至人可以直接对字符串进行读写操作，使得JS对象可以在不同的语言之间传递
+            - 用途：
+                1. 作为数据交换的格式
+                2. 用来编写配置文件
+          - 如何进行序列化：
+            - 在JS中有一个工具类 JSON（JavaScript Object Notation）JS对象表示法
+            - JS对象序列化后会换一个字符串，这个字符串我们称其为JSON字符串
+
+          - 也可以手动的编写JSON字符串，在很多程序的配置文件就是使用JSON编写的
+          - 编写JSON的注意事项：
+              1. JSON字符串有两种类型：
+                  JSON对象   {}
+                  JSON数组   []
+              2. JSON字符串的属性名必须使用双引号引起来
+              3. JSON中可以使用的属性值（元素）
+                  - 数字（Number）
+                  - 字符串（String）必须使用双引号
+                  - 布尔值（Boolean）
+                  - 空值（Null）
+                  - 对象（Object {}）
+                  - 数组（Array []）
+              4. JSON字符串的格式和JS对象的格式基本上一致的
+                  注意：JSON字符串如果属性是最后一个，则不要再加,
+      */
+
+    let obj = {
+      name: '孙悟空',
+      age: 18
+    };
+    console.log(obj);
+
+    // 将obj转换为JSON字符串
+    const str = JSON.stringify(obj); // JSON.stringify()可以将一个对象转换为JSON字符串
+    console.log(str); // {"name":"孙悟空","age":18}
+    console.log(typeof str); // string
+
+    // 将JSON字符串转换为JS对象
+    const obj2 = JSON.parse(str); // JSON.parse()可以将一个JSON格式的字符串转换为JS对象
+    console.log(obj2); // {name: '孙悟空', age: 18}
+    console.log(typeof obj2); // object
+
+    console.log(obj === obj2); // false
+
+
+    let str2 = '{"name": "猪八戒", "age": 28}';
+    console.log(str2); // {"name": "猪八戒", "age": 28}
+    console.log(JSON.parse(str2)); // {name: '猪八戒', age: 28}
+
+    // let arr3 = '["hello", true, undefined, NaN, {}]'; // 不支持写undefined，因为其他的语言可能读不出来
+    let arr3 = '["hello", true, NaN, {}]'; // undefined不能写，别的语言可能读不出来
+    console.log(arr3);
+
+    let arr4 = '{}';
+    console.log(arr4);
+
+    // let arr5 = '{'name': "dsdsds", "age": 1}'; // 属性名使用单引号直接报错，属性名一定要使用双引号
+
+    // let arr6 = JSON.parse('{"name": "ddd", age: 1,}');
+    // console.log(arr6); // Uncaught SyntaxError: Expected double-quoted property name in JSON at position 16 at JSON.parse (<anonymous>)
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
