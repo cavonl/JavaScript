@@ -1,0 +1,75 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-10-15 16:22:38
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-10-15 16:55:10
+ * @FilePath: /JavaScript/09_内建对象/07_Set.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Set</title>
+  <script>
+    /*
+        Set
+          - Set用来创建一个集合
+          - 它的功能和数组类似，不同点在于Set中不能存储重复的数据
+
+        使用方式：
+          创建：
+            new Set()
+            new Set([...])
+          方法：
+            set.size 获取数量
+            set.add() 添加元素
+            set.has() 检查元素
+            set.delete() 删除元素
+     */
+
+    // 创建一个Set
+    let set = new Set();
+    console.log(set); // Set(0) {size: 0}
+
+    set.add(10);
+    console.log(set); // Set(1) {10}
+
+    console.log(set.size); // 1
+
+    set.add('孙悟空');
+    console.log(set); // Set(2) {10, '孙悟空'}
+
+    // Set中不能存储重复的数据
+    set.add(10);
+    console.log(set); // Set(2) {10, '孙悟空'}
+
+    // has()表示集合里有没有这个数据
+    console.log(set.has(10)); // true
+    console.log(set.has('猪八戒')); // false
+
+    for (let item of set) {
+      console.log(item);
+    }
+
+    // 将set转换成数组
+    let arr = [...set];
+    console.log(arr); // [10, '孙悟空']
+
+    console.log(Array.from(set)); // [10, '孙悟空']
+
+
+    // 去重
+    let arr2 = new Set([1, 1, 2, 2, 2, 3, 6, 5, 6, 4, 6, 7, 8, 7, 8, 0, 9, 8, 0, 9, 8, 7, 6, 5]);
+    console.log([...arr2]); // [1, 2, 3, 6, 5, 4, 7, 8, 0, 9]
+
+    console.log(set.entries()); // 获取set中的键值对
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
