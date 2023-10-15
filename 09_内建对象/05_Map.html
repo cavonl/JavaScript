@@ -1,0 +1,100 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-10-15 11:59:32
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-10-15 14:03:18
+ * @FilePath: /JavaScript/09_内建对象/05_Map.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Map</title>
+  <script>
+    /*
+        Map
+          - Map 用来存储键值对结构的数据（key-value）
+          - Object中存储的数据就可以认为是一种键值对结构
+          - Map和Object的主要区别：
+              - Object中的属性名只能是字符串或字符，如果传递了一个其他类型的属性名，JS解析器会自动将其转换为字符串
+
+        总结：
+          1. 创建
+              new Map()
+
+          2. 属性和方法
+              map.size() 获取map中键值对的数量
+              map.set(key, value) 向map中添加键值对
+              map.get(key)  根据key获取值
+              map.delete(key) 删除指定数据
+              map.has(key) 检查map中是否包含指定键
+              map.clear() 删除全部的键值对
+
+     */
+    let testObj = {};
+
+    let obj = {
+      "name": "孙悟空",
+      'age': 18,
+      [Symbol()]: "哈哈"
+    };
+    console.log(obj); // {name: '孙悟空', age: 18, Symbol(): '哈哈'}
+
+    let obj2 = {
+      "name": "孙悟空",
+      'age': 18,
+      [Symbol()]: "哈哈",
+      [testObj]: '嘻嘻'
+    };
+    console.log(obj2); // { name: '孙悟空', age: 18, [object Object]: '嘻嘻', Symbol(): '哈哈' }
+    console.log(obj2[testObj]); // 嘻嘻
+    console.log(obj2[{}]); // 嘻嘻
+
+
+    // 创建一个Map
+    let map = new Map();
+    console.log(map); // Map(0) {size: 0}
+    console.log(map.size); // 0
+
+    // 添加数据
+    map.set("name", "孙悟空");
+    console.log(map); // Map(1) { 'name' => '孙悟空' }
+
+    map.set(testObj, "呵呵");
+    console.log(map); // Map(2) { 'name' => '孙悟空', { Object } => '呵呵' }
+
+    map.set(NaN, "疑惑");
+    console.log(map); // Map(2) { 'name' => '孙悟空', { Object } => '呵呵', NaN => '疑惑' }
+
+    console.log(map.size); // 3
+
+    // 获取数据
+    console.log(map.get("name")); // 孙悟空
+    console.log(map.get(testObj)); // 呵呵（存的时候是什么取的时候就还是什么）
+    console.log(map.get(NaN)); // 疑惑
+
+    // 删除数据
+    console.log(map); // Map(2) { 'name' => '孙悟空', { Object } => '呵呵', NaN => '疑惑' }
+    map.delete(testObj);
+    console.log(map); // Map(2) { 'name' => '孙悟空', NaN => '疑惑' }
+
+    // 是否存在
+    console.log(map.has("name")); // true
+    console.log(map.has(testObj)); // false
+
+    // 清除
+    map.clear();
+    console.log(map); // Map(0) { size: 0 }
+
+
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
