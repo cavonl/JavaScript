@@ -1,0 +1,77 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-10-15 15:43:08
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-10-15 16:21:53
+ * @FilePath: /JavaScript/09_内建对象/06_Map补充.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Map补充</title>
+  <script>
+
+    let map = new Map();
+    map.set("name", "孙悟空");
+    map.set("age", 18);
+
+    map.set({}, "呵呵");
+
+    // 将map转换为数组
+    let arr = Array.from(map);
+    // console.log(arr); // [['name', '孙悟空'], ['age', 18]]
+
+    console.log(arr); // [['name', '孙悟空'], ['age', 18], [{}, '呵呵']]
+
+    // 用展开运算符和Array.from()是一样的效果
+    console.log([...map]); // [['name', '孙悟空'], ['age', 18], [{}, '呵呵']]
+
+
+    let map2 = new Map([
+      ["name", "孙悟空"],
+      ["age", 18],
+      [{}, () => { }]
+    ]);
+
+    // 遍历map
+    for (let entry of map) {
+      let [key, value] = entry;
+      console.log(entry, key, value);
+    }
+
+    // 遍历map
+    for (const [key, value] of map) {
+      console.log(key, value);
+    }
+
+    map.forEach((ele, index, c) => {
+      console.log(ele, index, c);
+    })
+
+    /*
+        map.keys() 获取map中所有的key
+        map.values() 获取map中所有的value
+        map.entries() 获取map中的键值对
+     */
+    for (let key of map.keys()) {
+      console.log(key);
+    }
+
+    for (let val of map.values()) {
+      console.log(val);
+    }
+
+    for (let entries of map.entries()) {
+      console.log(entries);
+    }
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
