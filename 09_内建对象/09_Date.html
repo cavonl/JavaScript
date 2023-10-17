@@ -1,0 +1,78 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-10-17 16:43:11
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-10-17 22:34:52
+ * @FilePath: /JavaScript/09_内建对象/09_Date.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Date</title>
+  <script>
+    /*
+        Data
+          - 在JS中所有和时间相关的数据都有Date对象来表示
+          - 对象的方法：
+              new Date().getFullYear() 获取4位数年份
+              new Date().getMonth() 返回当前日期的月份（索引0-11）
+              new Date().getDate() 返回当前是几日
+              new Date().getDay() 返回当前日期是周几（0-6，0表示周日）
+              new Date().getTime() 返回当前日期对象的时间戳
+                时间戳：自1970年1月1日0时0分0秒到当前时间所经历的毫秒数，计算机底层存储时间时，使用都是时间戳
+              Date.now() 获取当前的时间戳
+     */
+
+    let d = new Date(); // 之间通过new Date()创建时间对象时，它创建的是当前时间的对象
+    console.log(d); // Tue Oct 17 2023 17:10:31 GMT+0800 (中国标准时间)
+
+    // 可以在Date()的构造函数中，传递一个表示时间的字符串
+    // 字符串的格式：月/日/年 时:分:秒
+    // 字符串的格式：年/月/日T时:分:秒
+    d = new Date("10/17/2020");
+    console.log(d); // Sat Oct 17 2020 00:00:00 GMT+0800 (中国标准时间)
+
+    d = new Date("10/17/2020 17:11:30");
+    console.log(d); // Sat Oct 17 2020 17:11:30 GMT+0800 (中国标准时间)
+
+    d = new Date("2021-10-20");
+    console.log(d); // Wed Oct 20 2021 08:00:00 GMT+0800 (中国标准时间)
+
+    d = new Date("2021-10-20T17:01:30");
+    console.log(d); // Wed Oct 20 2021 17:01:30 GMT+0800 (中国标准时间)
+
+    // new Date(年, 月, 日, 时, 分, 秒)
+    d = new Date(2016, 0, 1, 13, 45, 33);
+    console.log(d); // Fri Jan 01 2016 13:45:33 GMT+0800 (中国标准时间)
+
+
+    console.log(d.getFullYear()); // 2021
+    console.log(new Date().getFullYear()); // 2023
+
+    console.log(d.getMonth()); // 9
+    console.log(new Date().getMonth()); // 9
+
+    console.log(d.getDate()); // 20
+    console.log(new Date().getDate()); // 17
+
+    console.log(d.getDay()); // 3
+    console.log(new Date().getDay()); // 2
+
+    console.log(new Date().getTime()); // 1697552543594 毫秒
+
+    // 快8个小时2秒是因为东八区的原因
+    console.log(new Date(2016)); // Thu Jan 01 1970 08:00:02 GMT+0800 (中国标准时间)
+
+    console.log(Date.now()); // 直接返回当前的时间戳
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
