@@ -1,0 +1,74 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-10-18 16:24:26
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-10-18 20:29:15
+ * @FilePath: /JavaScript/09_内建对象/11_包装类.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>包装类</title>
+  <script>
+
+    /*
+        在JS中，除了直接创建原始值外，也可以创建原始值的对象
+
+          通过创建 new String() 可以创建String类型的对象
+          通过创建 new Number() 可以创建Number类型的对象
+          通过创建 new Boolean() 可以创建Boolean 类型的对象
+            - 但是千万不要这么做
+
+        包装类：
+          JS中一共有5个包装类
+            String --› 字符串包装String对象
+            Number --› 字符串包装Number对象
+            Boolean --› 字符串包装Boolean对象
+            BitInt --› 字符串包装BitInt对象
+            Symbol --› 字符串包装Symbol对象
+            - 通过包装类可以将一个原始值包装为一个对象
+                当我们对一个原始值调用方法或属性时，JS解释器会临时将原始值包装为对应的对象，然后调用这个对象的属性或方法
+
+          - 由于原始值会被临时转换为对应的对象，这就意味着对象中的方法都可以直接通过原始值来调用
+     */
+
+    // let str = "hello";
+    // let num = 10;
+    // let bool = true;
+    // 可以用以下内置对象进行转换
+    // String();
+    // Number();
+    // Boolean();
+
+    let str = new String('hello');
+    console.log(str);
+    let num = new Number(10);
+    console.log(num);
+    let bool = new Boolean(true);
+    console.log(bool);
+
+    let bool2 = new Boolean(true);
+    console.log(bool === bool2); // false
+
+    str = "hello";
+    str.name = "哈哈";
+    console.log(str.name); // undefined
+
+    num = 11;
+    num = num.toString();
+    console.log(num); // "11"
+
+    // 因为 null 没有包装类，不会临时转换对象，所以报错
+    // console.log(null.toString()); // Uncaught TypeError: Cannot read properties of null (reading 'toString')
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
