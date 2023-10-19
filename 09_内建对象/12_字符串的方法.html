@@ -1,0 +1,168 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-10-18 20:30:17
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-10-19 14:48:15
+ * @FilePath: /JavaScript/09_内建对象/12_字符串的方法.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>字符串的方法</title>
+  <script>
+    /*
+        https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String
+
+        字符串：
+          - 字符串其本质就是一个字符数组
+          - "hello" --› ["h", "e", "l", "l", "o"]
+          - 字符串的很多方法都和数组是非常类似的
+          - 属性和方法：
+              length 获取字符串的长度
+              字符串[索引] 获取指定位置的字符
+              str.at()（试验方法）
+                - 根据索引获取字符，可以接受负索引
+              str.charAt()
+                - 根据索引获取字符
+              str.concat()
+                - 用来连接两个或多个字符
+              str.includes()
+                - 用来检查字符串中是否包含某个内容
+                    有返回true
+                    没有返回false
+              str.indexOf()
+              str.lastIndexOf()
+                - 查询字符串中是否包含某个内容
+              str.startsWith()
+                - 检查一个字符串是否以指定内容开头
+              str.endsWith()
+                - 检查一个字符串是否以指定内容结尾
+              str.padStart()
+              str.padEnd()
+                - 通过添加指定的内容，使字符串保持某个长度
+              str.repeat()
+                - 将给定的元素重复给定的数次
+              str.replace()
+                - 使用一个新字符串替换一个指定内容
+              str.replaceAll()
+                - 使用一个新字符串替换所有指定内容
+              str.slice()
+                - 对字符串进行切片
+              str.substring()
+                - 截取字符串
+              str.split()
+                - 将一个字符拆分为一个数组
+              str.toLowerCase()
+              str.toLocaleLowerCase()
+                - 将字符串转换为小写
+              str.toUpperCase()
+              str.toLocaleUpperCase()
+                - 将字符串转换为大写
+              str.trim()
+                - 去除前后空格
+              str.trimStart()
+                - 去除开始空格
+              str.trimEnd()
+                - 去除结束空格
+     */
+
+    let str = "hello";
+    console.log(str.length); // 5
+    console.log(str[0]); // h
+    console.log(str[3]); // l
+    for (const char of str) {
+      console.log(char);
+    }
+
+    console.log(str.at(-1)); // o
+
+    console.log(str.charAt(0)); // h
+    console.log(str.charAt(-2)); // ''
+
+    console.log(str.concat(2)); // hello2
+    console.log(str.concat(' world')); // hello world
+
+    str = 'hello hello how are you';
+    console.log(str.includes("tom")); // false
+    console.log(str.includes("hello")); // true
+    console.log(str.includes("hello", 0)); // true
+    console.log(str.includes("hello", 12)); // false
+
+    console.log(str.indexOf("hello")); // 0
+    console.log(str.indexOf("tom")); // -1
+    console.log(str.lastIndexOf("hello")); // 6
+    console.log(str.lastIndexOf("tom")); // -1
+
+    console.log(str.endsWith("u")); // true
+    console.log(str.endsWith("o")); // false
+    console.log(str.startsWith("h")); // true
+    console.log(str.startsWith("e")); // false
+
+    str = "100";
+    console.log(str.padStart(2, "0")); // 100
+    console.log(str.padStart(7, "0")); // 0000100
+    console.log(str.padStart(7, "哈哈哈")); // 哈哈哈哈100
+    console.log(str.padEnd(4, "tt")); // 100t
+    console.log(str.padEnd(7, "tt")); // 100tttt
+    console.log(str.padEnd(2, "tt")); // 100
+
+    str = "哈"
+    console.log(str.repeat(10)); // 哈哈哈哈哈哈哈哈哈哈
+    console.log(str.repeat(2)); // 哈哈
+
+    str = 'hello hello how are you';
+    str.replace("hello", "abc");
+    console.log(str); // hello hello how are you
+
+    // 替换一个
+    let result = str.replace("hello", "abc");
+    console.log(result); // abc hello how are you
+    // 替换全部
+    result = str.replaceAll("hello", "abc");
+    console.log(result); // abc abc how are you
+
+    // 包括起始位置，不包括结束位置
+    console.log(str.slice(12, 15)); // how
+    console.log(str.substring(12, 15)); // how
+    console.log(str.slice(15, 12)); // ''
+    // 会自动交换位置
+    console.log(str.substring(15, 12)); // how
+
+    // 把字符串连成数组
+    str = "com@cn@edu@net@info";
+    console.log(str.split("@")); // ['com', 'cn', 'edu', 'net', 'info']
+    console.log(str.split("n")); // ['com@c', '@edu@', 'et@i', 'fo']
+    // 把数组连成字符串
+    str = ['com', 'cn', 'edu', 'net', 'info'];
+    console.log(str.join()); // com,cn,edu,net,info
+    console.log(str.join("@")); // com@cn@edu@net@info
+
+    str = "aFScfRKiqhjFGHFwri";
+    // 转成小写
+    console.log(str.toLowerCase()); // afscfrkiqhjfghfwri
+    console.log(str.toLocaleLowerCase()); // afscfrkiqhjfghfwri
+    // 转成大写
+    console.log(str.toUpperCase()); // AFSCFRKIQHJFGHFWRI
+    console.log(str.toLocaleUpperCase()); // AFSCFRKIQHJFGHFWRI
+
+    str = "   sfdf  sfd  ";
+    console.log(str); // "   sfdf  sfd  "
+    // 去除前后空格
+    console.log(str.trim()); // "sfdf  sfd"
+    // 去除开始空格
+    console.log(str.trimStart()); // "sfdf  sfd  "
+    // 去除结束空格
+    console.log(str.trimEnd()); // "   sfdf  sfd"
+
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
