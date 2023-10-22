@@ -1,0 +1,129 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-10-22 15:05:16
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-10-22 20:22:34
+ * @FilePath: /JavaScript/09_内建对象/15_正则表达式.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>正则表达式</title>
+  <script>
+    /*
+        量词
+          {m} 正好m个
+          {m,} 至少m个
+          {m,n} m～n个
+          + 一个以上，相当于 {1,}
+          * 任意数量的a（包括0）{0,}
+          ? 0~1个，相当于 {0,1}
+     */
+
+    let res = /ab/;
+    console.log(res.test("a")); // false
+    console.log(res.test("ab")); // true
+    console.log(res.test("b")); // false
+    console.log(res.test("ba")); // false
+    console.log(res.test("cab")); // true
+    console.log(res.test("acb")); // false
+    console.log(res.test("abc")); // true
+
+    res = /[a-z]/;
+    console.log(res.test("abddf")); // true
+
+    res = /aa/;
+    console.log(res.test("aa")); // true
+    console.log(res.test("a")); // false
+
+    // 20 表示量词，/a{20}/ 表示a要出现20次
+    res = /a{20}/;
+    console.log(res.test("a")); // false
+
+    // 表示a要出现3次
+    res = /a{3}/;
+    console.log(res.test("aaa")); // true
+    console.log(res.test("aa")); // false
+    console.log(res.test("aaaa")); // true(没做完全匹配所有为true)
+
+    res = /^a{3}$/; // 必须正好是3个a
+    console.log(res.test("aaa")); // true
+    console.log(res.test("aaaa")); // false
+    console.log(res.test("aa")); // false
+
+    // 对b完全匹配3个，因为只匹配量词的前面一个
+    res = /^ab{3}$/;
+    console.log(res.test("abbb")); // true
+    console.log(res.test("abb")); // false
+    console.log(res.test("ababab")); // false
+    console.log(res.test("bbb")); // false
+    console.log(res.test("abbbb")); // false
+
+    // 对ab完全匹配3个
+    res = /^(ab){3}$/;
+    console.log(res.test("ababab")); // true
+    console.log(res.test("abbb")); // false
+    console.log(res.test("abababab")); // false
+    console.log(res.test("aaa")); // false
+    console.log(res.test("bbb")); // false
+    console.log(res.test("abab")); // false
+
+    // 任意的3个字母
+    res = /^[a-z]{3}$/;
+    console.log(res.test("aaa")); // true
+    console.log(res.test("acs")); // true
+    console.log(res.test("as")); // false
+    console.log(res.test("asdf")); // false
+    console.log(res.test("as2")); // false
+
+    // 1个或一个以上的字母
+    res = /^[a-z]{1,}$/;
+    console.log(res.test("1")); // false
+    console.log(res.test("——")); // false
+    console.log(res.test("a")); // true
+    console.log(res.test("as")); // true
+    console.log(res.test("asd")); // true
+
+    // 1～3个字母
+    res = /^[a-z]{1,3}$/;
+    console.log(res.test("a")); // true
+    console.log(res.test("aa")); // true
+    console.log(res.test("aaa")); // true
+    console.log(res.test("aaaa")); // false
+
+    // 表示b后面的a至少有一个
+    res = /^ba+$/;
+    console.log(res.test("b")); // false
+    console.log(res.test("ba")); // true
+    console.log(res.test("baa")); // true
+    console.log(res.test("baaa")); // true
+    console.log(res.test("baaaf")); // false
+    console.log(res.test("aaa")); // false
+
+    // 表示必须有b，a可有可无
+    res = /^ba*$/;
+    console.log(res.test("b")); // true
+    console.log(res.test("a")); // false
+    console.log(res.test("ba")); // true
+    console.log(res.test("baaaa")); // true
+    console.log(res.test("bbbbaaa")); // false
+    console.log(res.test("ab")); // false
+    console.log(res.test("bc")); // false
+
+    // 表示b必须有，a没有或者1个
+    res = /^ba?$/;
+    console.log(res.test("b")); // true
+    console.log(res.test("ba")); // true
+    console.log(res.test("baa")); // false
+    console.log(res.test("a")); // false
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
