@@ -1,0 +1,91 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-10-23 14:07:57
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-10-23 14:55:01
+ * @FilePath: /JavaScript/09_内建对象/17_练习.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>练习</title>
+  <script>
+    /*
+      练习：将下面的字符串里面的手机号提取出来
+        dajsdh13715678903jasdlakdkjg13457890657djashdjka13811678908sdadadasd
+
+      自己动脑筋做的
+        1. 光想着仅仅只是提取出手机号
+        2. 没有想着把正则变成一个可以复用的，只是考虑当前字符串这样的想法不对
+        3. 我自己想着的是：
+            只要数字
+            13开头的
+            数字无限
+     */
+    let str = "dajsdh13715678903jasdlakdkjg13457890657djashdjka13811678908sdadadasd";
+    let res = /13[0-9]+/ig;
+    // console.log(res.exec(str)); // ['13715678903', index: 6, input: 'dajsdh13715678903jasdlakdkjg13457890657djashdjka13811678908sdadadasd', groups: undefined]
+    // console.log(res.exec(str)); // ['13457890657', index: 28, input: 'dajsdh13715678903jasdlakdkjg13457890657djashdjka13811678908sdadadasd', groups: undefined]
+    // console.log(res.exec(str)); // ['13811678908', index: 48, input: 'dajsdh13715678903jasdlakdkjg13457890657djashdjka13811678908sdadadasd', groups: undefined]
+    // console.log(res.exec(str)); // null
+    let result = res.exec(str), arr = [];
+    while (result) {
+      console.log(result[0]);
+      arr.push(result[0]);
+      result = res.exec(str);
+    }
+    console.log(arr);
+
+    /*
+        跟着老师做的：
+          dajsdh13715678903jasdlakdkjg13457890657djashdjka13811678908sdadadasd
+          用自己的语言把它描述出来：
+            1   3         501789087
+            1   3～9之间   任意数字 * 9（位）
+
+            10、11、12开头的都是特殊的
+     */
+    let str2 = "dajsdh13715678903jasdlakdkjg13457890657djashdjka13811678908sdadadasd";
+    let res2 = /1[3-9]\d{9}/g; // --› /1[3-9][0-9]{9}/ig
+    let result2;
+    while (result2 = res2.exec(str2)) {
+      console.log(result2[0]);
+    }
+
+    /*
+        附加条件：
+          将手机号的中间四位数隐藏掉，比如：130****5928
+          规律：
+            拆分成三组（3位数 4位数 4位数）
+     */
+    let str3 = "dajsdh13715678903jasdlakdkjg13457890657djashdjka13811678908sdadadasd";
+    let res3 = /(1[3-9]\d)\d{4}(\d{4})/g;
+
+    let result3;
+    while (result3 = res3.exec(str3)) {
+      // console.log(result3[0], result3[1], result3[2]);
+      console.log(`${result3[1]}****${result3[2]}`);
+    }
+
+    // 完全匹配
+    let str4 = "dajsdh13715678903jasdlakdkjg13457890657djashdjka13811678908sdadadasd";
+    let res4 = /^1[3-9]\d{9}$/; // 完全匹配只能是手机号，必须加^$ （如果去掉^$，那么前后是啥都不重要只要有手机号就行）
+    console.log(res4.test("13026105928")); // true
+    console.log(res4.test("1302610592")); // false（少一位）
+    console.log(res4.test("130261059222")); // false（多一位）
+    console.log(res4.test("12026105928")); // false（12开头）
+    console.log(res4.test("10026105928")); // false（10开头）
+    console.log(res4.test("11026105928")); // false（11开头）
+    console.log(res4.test("1302610****")); // false（参杂其他字符）
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
