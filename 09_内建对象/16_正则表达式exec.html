@@ -1,0 +1,71 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-10-22 20:23:38
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-10-23 14:05:38
+ * @FilePath: /JavaScript/09_内建对象/16_正则表达式exec.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>正则表达式exec</title>
+  <script>
+
+    /*
+        res.exec()
+          - 获取字符串中符合正则表达式的内容
+
+        g 表示全局匹配
+     */
+
+    let str = "abcaecafcacc";
+
+    // 提取出str中符合axc格式的内容
+    let res = /a[a-z]c/ig;
+    console.log(res.exec(str)); // ['abc', index: 0, input: 'abcaecafcacc', groups: undefined]
+    console.log(res.exec(str)); // ['aec', index: 3, input: 'abcaecafcacc', groups: undefined]
+    console.log(res.exec(str)); // ['afc', index: 6, input: 'abcaecafcacc', groups: undefined]
+    console.log(res.exec(str)); // ['acc', index: 9, input: 'abcaecafcacc', groups: undefined]
+    console.log(res.exec(str)); // null
+
+    // 单独提取出 axc 中的 x 字符
+    res = /a([a-z])c/ig;
+    console.log(res.exec(str)); // ['abc', 'b', index: 0, input: 'abcaecafcacc', groups: undefined]
+    console.log(res.exec(str)); // ['aec', 'e', index: 3, input: 'abcaecafcacc', groups: undefined]
+    console.log(res.exec(str)); // ['afc', 'f', index: 6, input: 'abcaecafcacc', groups: undefined]
+    console.log(res.exec(str)); // ['acc', 'c', index: 9, input: 'abcaecafcacc', groups: undefined]
+    console.log(res.exec(str)); // null
+
+    // 单独提取出 axc 中的 xc、x字符
+    res = /a(([a-z])c)/ig;
+    console.log(res.exec(str)); // ['abc', 'bc', 'b', index: 0, input: 'abcaecafcacc', groups: undefined]
+    console.log(res.exec(str)); // ['aec', 'ec', 'e', index: 3, input: 'abcaecafcacc', groups: undefined]
+    console.log(res.exec(str)); // ['afc', 'fc', 'f', index: 6, input: 'abcaecafcacc', groups: undefined]
+    console.log(res.exec(str)); // ['acc', 'cc', 'c', index: 9, input: 'abcaecafcacc', groups: undefined]
+    console.log(res.exec(str)); // null
+
+
+    // 利用循环一次性提取出需要的字符
+    res = /a(([a-z])c)/ig;
+    let result = res.exec(str);
+    // 为null就停止循环
+    while (result) {
+      console.log(result[0], result[1], result[2]);
+      result = res.exec(str);
+    }
+
+    /*
+      练习：将下面的字符串里面的手机号提取出来
+        dajsdh13715678903jasdlakdkjg13457890657djashdjka13811678908sdadadasd
+     */
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
