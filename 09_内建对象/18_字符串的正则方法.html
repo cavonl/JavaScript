@@ -1,0 +1,71 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-10-23 14:56:30
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-10-25 21:05:17
+ * @FilePath: /JavaScript/09_内建对象/18_字符串的正则方法.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>字符串的正则方法</title>
+  <script>
+    /*
+        split()
+          - 可以根据正则表达式来对一个字符串进行拆分
+        search()
+          - 可以去搜索符合正则表达式的内容第一次在字符串中出现的位置
+        replace()
+          - 根据正则表达式替换字符串中的指定字符
+        match()
+          - 根据正则表达式去匹配字符串中符合要求的内容
+        matchAll()
+          - 根据正则表达式去匹配字符串中符合要求的内容（必须设置全局匹配g）
+          - 返回的是一个迭代器
+     */
+
+    let str = "a@b@c@d";
+    console.log(str.split("@")); // ['a', 'b', 'c', 'd']
+
+    // 怎么根据abc、adc进行拆分
+    str = "孙悟空abc猪八戒adc沙和尚";
+    console.log(str.split(/a[bd]c/)); // ['孙悟空', '猪八戒', '沙和尚']
+
+    str = "孙悟空abc猪八戒adc沙和尚";
+    console.log(str.search("abc")); // 3
+    console.log(str.search("abcd")); // -1
+
+    str = "dajsdh13715678903jasdlakdkjg13457890657djashdjka13811678908sdadadasd";
+
+    // search配合正则表达式
+    console.log(str.search(/1[3-9]\d{9}/)); // 6
+
+    // 使用正则表达式替换指定的内容
+    console.log(str.replace("13715678903", "哈哈哈")); // dajsdh哈哈哈jasdlakdkjg13457890657djashdjka13811678908sdadadasd
+    console.log(str.replace(/1[3-9]\d{9}/g, "哈哈哈")); // dajsdh哈哈哈jasdlakdkjg哈哈哈djashdjka哈哈哈sdadadasd
+
+    // 返回正则表达式找到的内容
+    console.log(str.match(/1[3-9]\d{9}/g)); // ['13715678903', '13457890657', '13811678908']
+
+    console.log(str.matchAll(/1[3-9]\d{9}/g)); // RegExpStringIterator {}（返回一个迭代器）
+
+    // 迭代取返回值
+    for (let item of str.matchAll(/1[3-9]\d{9}/g)) {
+      console.log(item); // ['13715678903', index: 6, input: 'dajsdh13715678903jasdlakdkjg13457890657djashdjka13811678908sdadadasd', groups: undefined]...
+    }
+
+    // 分组迭代取返回值
+    for (let item of str.matchAll(/1[3-9]\d(\d{4})(\d{4})/g)) {
+      console.log(item); // ['13715678903', '1567', '8903', index: 6, input: 'dajsdh13715678903jasdlakdkjg13457890657djashdjka13811678908sdadadasd', groups: undefined]...
+    }
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
