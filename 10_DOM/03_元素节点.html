@@ -1,0 +1,118 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-10-26 14:56:16
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-10-26 22:53:00
+ * @FilePath: /JavaScript/10_DOM/03_元素节点.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>元素节点</title>
+</head>
+
+<body>
+  <button id="btn">点我一下</button>
+
+  <span class="s1">我是span1</span>
+  <span class="s1">我是span2</span>
+  <span class="s1">我是span3</span>
+  <span class="s1">我是span4</span>
+  <span class="s1">我是span5</span>
+
+  <div>我是div1</div>
+  <div>我是div2</div>
+  <div>我是div3</div>
+  <div>我是div4</div>
+  <div>我是div5</div>
+
+  <form>
+
+    <input type="text" name="username">
+    <input type="radio" name="gender" value="male"> 男
+    <input type="radio" name="gender" value="female"> 女
+  </form>
+
+  <script>
+    /*
+        元素节点对象（element）
+          - 在网页中，每一个标签都是一个元素节点
+          - 如何获取元素节点对象：
+              1. 通过document对象来获取元素节点
+              2. 通过document对象来创建元素节点
+          - 通过document对象来获取已有的元素节点：
+              document.getElementById()
+                - 根据id获取一个元素节点对象
+              document.getElementsByClassName()
+                - 根据元素的class属性值获取一组元素节点对象
+                - 返回的是一个类数组对象
+                - 该方法返回的结果是一个实时更新的集合，当网页中新添加元素时，集合也会实时的刷新
+              document.getElementsByTagName()
+                - 根据标签名获取一组元素节点对象
+                - 返回的结果是可以实时更新的集合
+                - document.getElementsByTagName("*") 获取页面中所有的标签（元素）
+              document.getElementsByName()
+                - 根据name属性获取一组元素节点对象
+                - 返回一个实时更新的集合
+                - 主要用于表单项
+              document.querySelectorAll()
+                - 根据选择器去页面中查询元素
+                - 会返回一个类数组（不会实时更新）
+              document.querySelector()
+                - 根据选择器去页面中查询第一个符合条件的元素
+
+            - 创建一个元素节点
+                document.createElement()
+                  - 根据标签名创建一个元素节点对象
+
+     */
+
+    console.log(document.body); // <body>...<body>
+
+    const btn = document.getElementById("btn");
+    console.log(btn);
+
+    const spans = document.getElementsByClassName("s1");
+    console.log(spans); // HTMLCollection(5) [span.s1, span.s1, span.s1, span.s1, span.s1]
+    console.log(spans.length); // 5
+    console.log(spans[0]);
+    for (let i = 0; i < spans.length; i++) {
+      console.log(spans[i]);
+      spans[i].innerText = `哈哈哈${i}`;
+    }
+    console.log(spans);
+
+    const divs = document.getElementsByTagName("div");
+    console.log(divs); // HTMLCollection(5) [div, div, div, div, div]
+
+    // 获取页面中所有的标签（元素）
+    console.log(document.getElementsByTagName("*"));
+
+    console.log(document.getElementsByName("gender")); // NodeList(2) [input, input]
+
+    console.log(document.querySelectorAll("div")); // NodeList(5) [div, div, div, div, div]
+    console.log(document.querySelectorAll(".s1")); // NodeList(5) [span.s1, span.s1, span.s1, span.s1, span.s1]
+    console.log(document.querySelectorAll("#btn")); // NodeList [button#btn]
+    console.log(document.querySelectorAll("#btn")[0]); // <button id="btn">点我一下</button>
+    // 没有也是返回数据，为空
+    console.log(document.querySelectorAll("#btn22")); // NodeList []
+
+    // 只返回第一个符合条件的元素
+    console.log(document.querySelector("div")); // <div>我是div1</div>
+    console.log(document.querySelector(".s1")); // <span class="s1">哈哈哈0</span>
+    console.log(document.querySelector("#btn")); // <button id="btn">点我一下</button>
+
+
+    // 创建一个新的标签
+    console.log(document.createElement("h2")); // <h2></h2>
+    // 添加到网页中
+    const h2 = document.body.appendChild(document.createElement("h2"));
+    h2.innerText = "我是h2";
+
+  </script>
+</body>
+
+</html>
