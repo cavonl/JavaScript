@@ -1,0 +1,59 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-10-26 14:07:59
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-10-26 14:52:44
+ * @FilePath: /JavaScript/10_DOM/02_document对象.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>document对象</title>
+</head>
+
+<body>
+  <a href="#">哈哈哈</a>
+  <script>
+
+    /*
+        document对象
+          - document对象表示的是整个网页
+          - document对象的原型链
+              - HTMLDocument -› Document -› Node -› EventTarget -› Object.prototype -› null
+              - 凡是在原型链上存在的对象的属性和方法都可以通过Document去调用
+              - 部分属性：
+                  document.documentElement  获取html根元素
+                  document.head   获取head元素
+                  document.title  获取title元素
+                  document.body   获取body元素
+                  document.links  获取网页中所有的超链接
+                  ...
+
+     */
+
+    console.log(document.__proto__); // HTMLDocument {…}
+    console.log(document.__proto__.__proto__); // Document {…}
+    console.log(document.__proto__.__proto__.__proto__); // Node {…}
+    console.log(document.__proto__.__proto__.__proto__.__proto__); // EventTarget {…}
+    console.log(document.__proto__.__proto__.__proto__.__proto__.__proto__); // Object.prototype
+    console.log(document.__proto__.__proto__.__proto__.__proto__.__proto__.__proto__); // null
+
+    // 获取html根元素
+    console.log(document.documentElement);
+    // 获取html标题
+    console.log(document.title); // document对象
+    document.title = "哈哈哈";
+    console.log(document.title); // 哈哈哈
+    // 获取网页中所有的表单
+    console.log(document.forms); // HTMLCollection []
+    // 获取网页中所有的图片
+    console.log(document.images); // HTMLCollection []
+    // 获取网页中所有的超链接
+    console.log(document.links); // HTMLCollection [a]
+  </script>
+</body>
+
+</html>
