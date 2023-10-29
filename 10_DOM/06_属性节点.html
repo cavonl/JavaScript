@@ -1,0 +1,81 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-10-29 17:01:54
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-10-29 17:46:13
+ * @FilePath: /JavaScript/10_DOM/06_属性节点.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>属性节点</title>
+</head>
+
+<body>
+  <!-- <input type="text" name="username" value="admin" class="a" disabled> -->
+  <input type="text" name="username" value="admin" class="a">
+
+  <script>
+    /*
+        属性节点（Attr）
+          - 在DOM中也是一个对象，通常不需要获取对象而是直接通过元素即可完成对其的任何操作
+          - 如何操作属性节点：
+              方式一：
+                读取：
+                  - 元素.属性名，（注意，class属性需要使用className来读取）
+                  - 读取一个布尔值时，会返回true或false
+                修改：元素.属性名 = 属性值
+
+              方式二：
+                读取：element.getAttribute(属性名)
+                修改：element.setAttribute(属性名，属性值)
+                删除：element.removeAttribute(属性名)
+
+     */
+    // const input = document.getElementsByName("username"); // NodeList [input]
+    let input = document.getElementsByName("username")[0];
+    console.log(input); // <input type="text" name="username" value="admin">
+
+    input = document.querySelector("[name=username]");
+    console.log(input); // <input type="text" name="username" value="admin">
+
+    console.log(input.type); // text
+    console.log(input.name); // username
+    console.log(input.value); // admin
+    console.log(input.class); // undefined
+    console.log(input.className); // a
+
+    // 有属性disabled为true，没有 为false
+    // console.log(input.disabled); // true
+    console.log(input.disabled); // false
+    // input.value = "孙悟空";
+    input.disabled = true;
+    input.disabled = false;
+    // 自动转换
+    input.disabled = "disabled"; // true
+    input.disabled = 0; // false
+    input.disabled = "xxxx"; //  // true
+    input.disabled = 1; // true
+    input.disabled = null; // false
+
+    console.log(input.getAttribute("type")); // text
+    console.log(input.getAttribute("name")); // username
+    console.log(input.getAttribute("value")); // admin
+    console.log(input.getAttribute("class")); // a
+    console.log(input.getAttribute("className")); // null
+
+    input.setAttribute("value", "孙悟空");
+    input.setAttribute("disabled", true); // （true，禁用状态）
+    // 规范用法
+    input.setAttribute("disabled", "disabled"); // （true，禁用状态）
+    // 由于会转换为字符串格式"false"，所以还是为禁用状态，如果想要可用状态，用删除方法
+    input.setAttribute("disabled", false); // （true，禁用状态）
+    input.removeAttribute("disabled"); // （false，可用状态）
+
+  </script>
+</body>
+
+</html>
