@@ -1,0 +1,95 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-10-29 13:32:18
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-10-29 14:57:16
+ * @FilePath: /JavaScript/10_DOM/05_文本节点.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文本节点</title>
+</head>
+
+<body>
+
+  <div id="box1">我是box1</div>
+
+  <div id="box2">
+    <span>我是box2</span>
+  </div>
+
+  <div id="box3">
+    <span style="display: none;">我是box3</span>
+  </div>
+
+  <div id="box4">
+    <span style="text-transform: uppercase ;">我是box4</span>
+  </div>
+
+  <script>
+    /*
+      在DOM中，网页中所有的文本内容都是文本节点对象，可以通过元素来获取其中的文本节点对象，但是我们通常不会这么做
+
+        我们可以直接通过元素去修改其中的文本，修改文本的三个属性
+          element.textContent 获取或修改元素中的文本内容
+            - 获取的是标签中的内容，不会考虑css样式
+            - 性能好点
+          element.innerText   获取或修改元素中的文本内容
+            - innerText获取内容时，会考虑css样式
+            - 通过innerText去读取css样式，会触发网页的重拍（计算css样式）
+            - 当字符串中有标签时，会自动对标签进行转义
+            - <li> --› &lt;li&gt;
+          element.innerHTML   获取或修改元素中的html代码
+            - 可以直接向元素中添加html代码
+            - innerHTML插入内容时，有被xss注入的风险
+
+     */
+
+    const box1 = document.getElementById("box1");
+    const box2 = document.getElementById("box2");
+    const box3 = document.getElementById("box3");
+    console.log(box1.firstChild); // "我是box1"
+
+    // box1.innerText = "xxx";
+    // console.log(box1.textContent); // xxx
+
+    box1.textContent = "box1.textContent 修改的内容";
+    console.log(box1.textContent);
+
+    box1.innerText = "box1.innerText 修改的内容";
+    console.log(box1.innerText);
+
+
+    console.log(box2.innerText); // '我是box2'
+    console.log(box2.textContent); // '\n    我是box2\n  '
+    console.log(box2.innerHTML); // '\n    <span>我是box2</span>\n  '
+
+    // 利用属性添加的文本在网页中有进行转义（没有去掉标签名）
+    box2.innerText = "<li>box1.innerText inset</li>";
+    box2.textContent = "<li>box1.textContent inset</li>";
+
+    // 利用属性添加的文本在网页中没有进行了转义（有去掉标签名）
+    box2.innerHTML = "<li>box2.innerHTML inset</li>";
+    // 如果坏人要用插入以下脚本，那么就会产生xss风险
+    // box2.innerHTML = "<script scr='http://sss/sss.js'><\/script>";
+
+
+    // 由于设置的css display:none 不考虑css，因此这段代码没有在网页中显示
+    console.log(box3.textContent); // '\n    我是box3\n  '
+
+    // 由于会考虑到css display:none，所以不可见，因此返回空串
+    console.log(box3.innerText); // ''
+
+
+    // 设置css后，网页显示大写，textContent显示小写，因为网页是变形后的结果，textContent是原始值
+    console.log(box4.textContent); // '\n    我是box4\n  '
+    // 设置css后，网页显示大写，innerText显示大写
+    console.log(box4.innerText); // '我是BOX4'
+  </script>
+</body>
+
+</html>
