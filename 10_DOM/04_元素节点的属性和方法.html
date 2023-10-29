@@ -1,0 +1,99 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-10-29 09:29:33
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-10-29 13:31:31
+ * @FilePath: /JavaScript/10_DOM/04_元素节点的属性和方法.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>元素节点的属性和方法</title>
+</head>
+
+<body>
+
+  <div id="box1">
+    我是box1
+    <span class="s1">我是box1-span1</span>
+    <span class="s1">我是box1-span2</span>
+  </div>
+
+  <span class="s1">我是body-span1</span>
+
+  <script>
+
+    /*
+        div元素的原型链
+          HTMLDivElement -› HTMLElement -› Element -› Node -› EventTarget -› Object.prototype -› null
+
+        通过元素节点对象获取其他节点的方法
+          element.childNodes 获取当前元素的子节点（会包含空白的子节点）
+          element.firstChild 获取当前元素的的第一个子节点
+          element.firstElementChild 获取当前元素的第一个子元素
+          element.lastElementChild 获取当前元素的最后一个子元素
+          element.nextElementSibling 获取当前元素的下一个兄弟元素
+          element.previousElementSibling 获取当前元素的上一个兄弟元素
+          element.parentNode 获取当前元素的父节点
+          element.parentElement 获取当前元素的父节点
+          element.tagName 获取当前元素的标签名
+     */
+
+
+    const box1 = document.getElementById("box1");
+    console.log(box1);
+    console.log(box1.__proto__); // HTMLDivElement
+    console.log(box1.__proto__.__proto__); // HTMLElement
+    console.log(box1.__proto__.__proto__.__proto__); // ELement
+    console.log(box1.__proto__.__proto__.__proto__.__proto__); // Node
+    console.log(box1.__proto__.__proto__.__proto__.__proto__.__proto__); // EventTarget
+    console.log(box1.__proto__.__proto__.__proto__.__proto__.__proto__.__proto__); // Object.prototypr
+    console.log(box1.__proto__.__proto__.__proto__.__proto__.__proto__.__proto__.__proto__); // null
+
+    // 用box1调，是找box1里面的span，如果用document，那么就是找网页中所有的span
+    const spans = box1.getElementsByTagName("span");
+    // 等同于 box1.getElementsByClassName("s1");
+    // 等同于 box1.querySelectorAll("span");
+    // 等同于 box1.querySelectorAll(".s1");
+    console.log(spans); // HTMLCollection(2) [span.s1, span.s1]
+    console.log(spans.length); // 2
+
+    console.log(box1.childNodes); // NodeList(5) [text, span.s1, text, span.s1, text]
+    console.log(box1.childNodes.length); // 5
+
+    console.log(box1.children); // HTMLCollection(2) [span.s1, span.s1]
+    console.log(box1.children.length); // 2
+
+    // 获取box1中的第一个子节点
+    console.log(box1.firstChild); // " 我是box1 " || #text(换行)
+
+    console.log(box1.firstElementChild); // <span class="s1">我是box1-span1</span>
+    console.log(box1.lastElementChild); // <span class="s1">我是box1-span2</span>
+
+    // 获取当前元素紧挨着它后面的元素
+    console.log(box1.nextSibling); // #text
+    console.log(box1.nextElementSibling); // <span class="s1">我是body-span1</span>
+    // 获取当前元素紧挨着它前面的元素
+    console.log(box1.previousElementSibling); // null
+
+    // 获取父元素
+    console.log(box1.parentNode); // <body>...</body>
+    console.log(box1.parentNode.parentNode); // <html>...</html>
+    console.log(box1.parentNode.parentNode.parentNode); // #document
+    console.log(box1.parentNode.parentNode.parentNode.parentNode); // null
+
+    console.log(box1.parentElement); // <body>...</body>
+    console.log(box1.parentElement.parentElement); // <html>...</html>
+    console.log(box1.parentElement.parentElement.parentElement); // null
+
+    console.log(box1.tagName); // DIV
+    console.log(box1.lastElementChild.tagName); // SPAN
+
+
+  </script>
+</body>
+
+</html>
