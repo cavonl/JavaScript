@@ -1,0 +1,73 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-10-30 13:07:42
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-10-30 18:10:49
+ * @FilePath: /JavaScript/10_DOM/07_事件.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>事件</title>
+</head>
+
+<body>
+  <!-- 1. 在元素的属性中设置事件 -->
+  <button id="btn1" onclick="alert('点我干嘛呢？')">点我一下</button>
+  <button id="btn2" ondblclick="alert('双击我干嘛呢？')">点我一下</button>
+  <button id="btn3" onmouseenter="alert('鼠标移入过来干嘛？')">点我一下</button>
+  <hr>
+
+  <!-- 2. 通过元素的指定属性设置回调函数的形式来绑定事件 -->
+  <button id="btn4">点我一下</button>
+  <button id="btn5">点我一下</button>
+
+  <!-- 3. 通过元素addEventListener()方法来绑定事件 -->
+  <button id="btn6">点我一下</button>
+
+  <script>
+    /*
+        事件（event）
+          - 事件就是用户和页面之间发生的交互的行为，比如：点击按钮、鼠标移动、双击按钮、敲击键盘、松开按键...
+          - 可以通过事件绑定响应函数（回调函数），来完成和用户之间的交互
+          - 绑定响应函数的方式：
+              1. 可以直接在元素的属性中设置
+              2. 可以通过元素的指定属性设置回调函数的形式来绑定事件（一个事件只能绑定一个响应函数）
+              3. 可以通过元素addEventListener()方法来绑定事件
+     */
+
+    // 获取到按钮对象
+    let btn4 = document.getElementById("btn4");
+    let btn5 = document.getElementById("btn5");
+    let btn6 = document.getElementById("btn6");
+    // 对按钮对象的事件属性设置响应函数
+    btn4.onclick = function () {
+      alert("我又被点了一下～～");
+    }
+    // 替换掉前面的函数
+    btn4.onclick = function () {
+      alert("111112323432");
+    }
+
+    btn5.ondblclick = function () {
+      alert("我又被点了两下～～");
+    }
+
+    btn6.addEventListener("click", function () {
+      alert("哈哈哈");
+    });
+    // 不会替换掉前面的函数，而且函数都会一一执行
+    btn6.addEventListener("click", function () {
+      alert("嘻嘻嘻");
+    });
+    btn6.addEventListener("click", function () {
+      alert("嚯嚯嚯");
+    });
+
+  </script>
+</body>
+
+</html>
