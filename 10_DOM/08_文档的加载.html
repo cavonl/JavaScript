@@ -1,0 +1,87 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-10-30 18:14:48
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-10-30 21:17:20
+ * @FilePath: /JavaScript/10_DOM/08_文档的加载.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文档的加载</title>
+  <!-- 这样引入 btn为null -->
+  <!-- <script src="./script/script.js"></script> -->
+  <!-- 当加入defer，表示延迟加载，等到所有的文档加载完毕之后才加载（窗口内容先加载） -->
+  <script src="./script/script.js" defer></script>
+  <script>
+    /*
+        网页是自上向下加载的，如果将js代码编写到网页的上边，js代码在执行时网页还没有加载完毕，这时会出现无法捕获到DOM对象的情况
+
+        window.onload 事件会在窗口中的内容加载完毕之后才触发
+        document 的 DOMContentLoaded 事件会在当前文档加载完毕之后触发
+
+        如何解决这个问题：
+          1. 将script标签编写到body的最后（优先级*****）
+          2. 将代码编写到window.onload的回调函数中
+          3. 将代码编写到document对象的DOMContentLoaded回调函数中（执行时机更早）
+          4. 将代码编写到外部的js文件中，然后以defer的形式进行引入（执行时机更早，早于DOMContentLoaded）（开发优先级*****）
+     */
+
+    // let btn = document.getElementById("btn");
+    // console.log(btn); // null
+    // btn.onclick = function () {
+    //   alert('111'); // Uncaught TypeError: Cannot set properties of null (setting 'onclick')
+    // }
+
+    // 1. onload事件会在窗口都加载完了以后才执行
+    window.onload = function () { // 2. onload事件执行才会触发函数
+      // 3. 代码执行（代码执行完毕，窗口已经加载完毕）
+      let btn = document.getElementById("btn");
+      console.log(btn); // <button id="btn">点我一下</button>
+      // alert(111);
+    }
+
+    window.addEventListener("load", function () {
+      let btn = document.getElementById("btn");
+      // console.log(btn); // <button id="btn">点我一下</button>
+      // 需要等待所有的文档都加载完之后才会触发（先渲染窗口中的内容，后执行alert代码）
+      // alert(111);
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      let btn = document.getElementById("btn");
+      console.log(btn); // <button id="btn">点我一下</button>
+      // alert代码先触发之后才加载所有的文档（先执行alert代码，后渲染窗口中的内容）
+      // alert(111);
+    });
+  </script>
+</head>
+
+<body>
+
+  <button id="btn">点我一下</button>
+
+  <iframe src="https://www.aizhuoxiao.com/#/reservation/index" frameborder="0"></iframe>
+
+  <script>
+    // let btn = document.getElementById("btn");
+    // console.log(btn); // <button id="btn">点我一下</button>
+  </script>
+  <!-- 这样引入 btn为 <button id="btn">点我一下</button> -->
+  <!-- <script src="./script/script.js"></script> -->
+</body>
+
+<!--
+  可以写到body的外面，但是script标签就会变成html的子元素，
+  根据html规范，html只有两个子元素，一个是head，一个是body，因此不符合html语法规范。
+  不过html会自动调整，将body外面或者head外面的script标签自动调整到body里面。
+-->
+<!-- <script>
+  let btn = document.getElementById("btn");
+  console.log(btn); // <button id="btn">点我一下</button>
+</script> -->
+
+</html>
