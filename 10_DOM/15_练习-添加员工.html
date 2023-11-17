@@ -2,8 +2,8 @@
  * @Author: cavon 425247833@qq.com
  * @Date: 2023-11-17 16:27:59
  * @LastEditors: cavon 425247833@qq.com
- * @LastEditTime: 2023-11-17 21:23:47
- * @FilePath: /JavaScript/10_DOM/15_练习.html
+ * @LastEditTime: 2023-11-17 21:54:39
+ * @FilePath: /JavaScript/10_DOM/15_练习-添加员工.html
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +11,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>练习</title>
+  <title>练习-添加员工</title>
   <style>
     .outer {
       width: 400px;
@@ -59,7 +59,15 @@
         const email = document.getElementById("email").value;
         const salary = document.getElementById("salary").value;
 
-        // 这种写法，容易被xss攻击
+        // 将获取到的数据设置成DOM对象
+        // <tr>
+        //   <td>孙悟空</td>
+        //   <td>swk@hgs.com</td>
+        //   <td>10000</td>
+        //   <td><a href="javascript:;">删除</a></td>
+        // </tr>
+
+        // 这种写法，容易被xss攻击，比如在文本框中输入script标签会直接解析
         tbody.insertAdjacentHTML("beforeend", `
           <tr>
             <td>${names}</td>
