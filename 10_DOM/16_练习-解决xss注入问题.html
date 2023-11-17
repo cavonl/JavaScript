@@ -1,0 +1,162 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-11-17 21:27:38
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-11-17 22:16:07
+ * @FilePath: /JavaScript/10_DOM/16_练习-解决xss注入问题.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>练习-解决xss注入问题</title>
+  <style>
+    .outer {
+      width: 400px;
+      margin: 100px auto;
+      text-align: center;
+    }
+
+    table {
+      width: 400px;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th,
+    td {
+      border: 1px solid black;
+      padding: 10px 0;
+    }
+
+    form div {
+      margin: 10px 0;
+    }
+  </style>
+  <script>
+    window.addEventListener("load", function () {
+      // 获取超链接
+      const links = document.links;
+      for (let i = 0; i < links.length; i++) {
+        links[i].onclick = handlerDelEmp;
+      }
+
+      function handlerDelEmp() {
+        const tr = this.parentNode.parentNode;
+        const empName = tr.firstElementChild.textContent;
+        if (confirm("确定要删除【" + empName + "】吗？")) {
+          tr.remove();
+        }
+      }
+
+      // 获取添加按钮
+      const btn = document.getElementById("btn");
+      // 获取tbody
+      const tbody = document.querySelector("tbody");
+
+      btn.onclick = function () {
+        // 获取用户输入的数据
+        const names = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const salary = document.getElementById("salary").value;
+        // 将获取到的数据设置成DOM对象
+        // <tr>
+        //   <td>孙悟空</td>
+        //   <td>swk@hgs.com</td>
+        //   <td>10000</td>
+        //   <td><a href="javascript:;">删除</a></td>
+        // </tr>
+
+        // 这种写法容易被xss攻击，在文本框中输入<script>alert(123)<\/script>会直接解析，不会渲染成文本进行展示
+        // tbody.insertAdjacentHTML("beforeend", `
+        //   <tr>
+        //     <td>${names}</td>
+        //     <td>${email}</td>
+        //     <td>${salary}</td>
+        //     <td><a href="javascript:;">删除</a></td>
+        //   </tr>
+        // `);
+
+        // 在文本框中输入<script>alert(123)<\/script>直接转义，可以进行展示但是已经失去了标签的作用，不会对网页产生任何的影响
+        // 创建tr
+        let tr = document.createElement("tr");
+        // 创建td
+        let nameTD = document.createElement("td");
+        let emailTD = document.createElement("td");
+        let salaryTD = document.createElement("td");
+
+        // 添加文本
+        nameTD.textContent = names;
+        emailTD.textContent = email;
+        salaryTD.textContent = salary;
+
+        // 将三个td添加到tr中
+        tr.appendChild(nameTD);
+        tr.appendChild(emailTD);
+        tr.appendChild(salaryTD);
+        // 静态写死的东西可以用insertAdjacentHTML，动态用户的填写的就用上面的方式
+        tr.insertAdjacentHTML("beforeend", '<td><a href="javascript:;">删除</a></td>');
+
+        tbody.appendChild(tr);
+
+        /*
+            由于上边的超链接是新添加的，所以它的上边并没有绑定单击响应函数，所以新添加的员工无法删除
+            解决方式：为新添加的超链接单独绑定响应函数
+         */
+        links[links.length - 1].onclick = handlerDelEmp;
+      }
+    });
+  </script>
+</head>
+
+<body>
+  <div class="outer">
+    <table>
+      <tbody>
+        <tr>
+          <th>姓名</th>
+          <th>邮件</th>
+          <th>薪资</th>
+          <th>操作</th>
+        </tr>
+        <tr>
+          <td>孙悟空</td>
+          <td>swk@hgs.com</td>
+          <td>10000</td>
+          <td><a href="javascript:;">删除</a></td>
+        </tr>
+        <tr>
+          <td>猪八戒</td>
+          <td>zbj@glz.com</td>
+          <td>8000</td>
+          <td><a href="javascript:;">删除</a></td>
+        </tr>
+        <tr>
+          <td>沙和尚</td>
+          <td>zbj@glz.com</td>
+          <td>6000</td>
+          <td><a href="javascript:;">删除</a></td>
+        </tr>
+      </tbody>
+    </table>
+    <form action="#">
+      <div>
+        <label for="name">姓名</label>
+        <input type="text" id="name">
+      </div>
+      <div>
+        <label for="email">邮件</label>
+        <input type="email" id="email">
+      </div>
+      <div>
+        <label for="salary">薪资</label>
+        <input type="number" id="salary">
+      </div>
+      <button type="button" id="btn">添加</button>
+    </form>
+  </div>
+</body>
+
+</html>
