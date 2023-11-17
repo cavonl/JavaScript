@@ -1,0 +1,154 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-11-15 21:10:05
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-11-17 12:46:06
+ * @FilePath: /JavaScript/10_DOM/14_练习.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>练习</title>
+  <style>
+    .outer {
+      width: 400px;
+      margin: 100px auto;
+      text-align: center;
+    }
+
+    table {
+      width: 400px;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    td,
+    th {
+      border: 1px solid black;
+      padding: 10px 0;
+    }
+
+    form div {
+      margin: 10px 0;
+    }
+  </style>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", function () {
+      /*
+          点击删除超链接后，删除当前的员工信息
+       */
+
+      // 获取所有的超链接
+      const links = document.links;
+
+      // 为它们（links）绑定单击响应函数
+      for (let i = 0; i < links.length; i++) {
+        // links[i].onclick = function () {
+        //   // alert(111)
+        //   /*
+        //       本练习中的超链接，我们是不希望发生跳转，但是跳转行为是超链接的默认行为
+        //       只要点击超链接就会触发页面的跳转，事件中可以通过取消默认行为来阻止超链接的跳转
+        //       使用return false来取消默认行为，只在 xxx.xxx = function() {} 这种形式绑定的事件中才适用
+        //    */
+        //   return false; // 不会跳转到百度
+        // }
+
+        // links[i].addEventListener("click", function() {
+        //   alert(123);
+        //   return false; // 无法取消默认行为（还是会跳转到百度）
+        // });
+
+        // links[i].onclick = function () {
+        //   // 删除当前员工，删除当前超链接所在的tr
+        //   // console.log(this);
+
+        //   // this表示当前点击的超链接
+        //   const tr = this.parentNode.parentNode; // 当前的超链接的上一级的上一级，也就是a标签的爷爷tr标签
+
+        //   // 获取要删除的员工的姓名
+        //   // let empName = tr.getElementsByTagName("td")[0].textContent;
+        //   let empName = tr.firstElementChild.textContent;
+        //   // 弹出一个友好的提示 确认true  取消false
+        //   if (confirm("确认要删除【" + empName + "】吗？")) {
+        //     // 删除tr
+        //     tr.remove();
+        //   }
+        // }
+
+        links[i].onclick = handlerDelEmp;
+      }
+
+      // 将函数提取到循环外面进行声明，避免多次重复的创建函数
+      function handlerDelEmp() {
+        // 获取超链接的爷爷元素,this表示当前点击的超链接
+        const tr = this.parentNode.parentNode;
+        // 获取要删除的员工姓名
+        // const empName = tr.getElementsByTagName("td")[0].textContent;
+        const empName = tr.firstElementChild.textContent;
+        // 弹出确认删除提示框
+        if (confirm("确认要删除【" + empName + "】吗？")) {
+          // 删除tr
+          tr.remove();
+        }
+      }
+    });
+  </script>
+</head>
+
+<body>
+  <div class="outer">
+    <table>
+      <tbody>
+        <tr>
+          <th>姓名</th>
+          <th>邮件</th>
+          <th>薪资</th>
+          <th>操作 </th>
+        </tr>
+        <tr>
+          <td>孙悟空</td>
+          <td>swk@hgs.com</td>
+          <td>10000</td>
+          <!-- <td><a href="#">删除</a></td> -->
+          <td><a href="javascript:;">删除</a></td><!-- 这样写不管怎样都不会发生跳转 -->
+        </tr>
+        <tr>
+          <td>猪八戒</td>
+          <td>zbj@glz.com</td>
+          <td>8000</td>
+          <!-- <td><a href="https://www.baidu.com/">删除</a></td> -->
+          <td><a href="javascript:;">删除</a></td>
+        </tr>
+        <tr>
+          <td>沙和尚</td>
+          <td>shs@lsh.com</td>
+          <td>6000</td>
+          <!-- <td><a href="#">删除</a></td> -->
+          <td><a href="javascript:;">删除</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <form action="#">
+      <div>
+        <label for="name">姓名</label>
+        <input type="text" id="name">
+      </div>
+      <div>
+        <label for="email">邮件</label>
+        <input type="email" id="email">
+      </div>
+      <div>
+        <label for="salary">薪资</label>
+        <input type="number" id="salary">
+      </div>
+      <button>添加</button>
+    </form>
+  </div>
+</body>
+
+</html>
