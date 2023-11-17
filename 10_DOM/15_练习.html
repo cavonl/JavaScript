@@ -1,0 +1,131 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-11-17 16:27:59
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-11-17 21:23:47
+ * @FilePath: /JavaScript/10_DOM/15_练习.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>练习</title>
+  <style>
+    .outer {
+      width: 400px;
+      margin: 100px auto;
+      text-align: center;
+    }
+
+    table {
+      width: 400px;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th,
+    td {
+      border: 1px solid black;
+      padding: 10px 0;
+    }
+
+    form div {
+      margin: 10px 0;
+    }
+  </style>
+  <script>
+    window.addEventListener("load", function () {
+      const links = document.links;
+      for (let i = 0; i < links.length; i++) {
+        links[i].onclick = handlerDelEmp;
+      }
+      function handlerDelEmp() {
+        const tr = this.parentNode.parentNode;
+        // const empName = document.getElementsByTagName("td")[0].textContent;
+        const empName = tr.firstElementChild.textContent;
+        if (confirm("确认要删除【" + empName + "】吗？")) {
+          tr.remove();
+        }
+      }
+
+      const tbody = document.querySelector("tbody");
+      const btn = document.getElementById("btn");
+
+      btn.onclick = function () {
+        // return false; // 阻止默认跳转行为
+        const names = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const salary = document.getElementById("salary").value;
+
+        // 这种写法，容易被xss攻击
+        tbody.insertAdjacentHTML("beforeend", `
+          <tr>
+            <td>${names}</td>
+            <td>${email}</td>
+            <td>${salary}</td>
+            <td><a href="javascript:;">删除</a></td>
+          </tr>
+        `);
+
+        /*
+            由于上边的超链接是新添加的，所以它的上边并没有绑定单击响应函数，所以新添加的员工无法删除
+            解决方式：为新添加的超链接单独绑定响应函数
+         */
+        links[links.length - 1].onclick = handlerDelEmp;
+      }
+    })
+  </script>
+</head>
+
+<body>
+  <div class="outer">
+    <table>
+      <tbody>
+        <tr>
+          <th>姓名</th>
+          <th>邮件</th>
+          <th>薪资</th>
+          <th>操作</th>
+        </tr>
+        <tr>
+          <td>孙悟空</td>
+          <td>swk@hgs.com</td>
+          <td>10000</td>
+          <td><a href="javascript:;">删除</a></td>
+        </tr>
+        <tr>
+          <td>猪八戒</td>
+          <td>zbj@glz.com</td>
+          <td>8000</td>
+          <td><a href="javascript:;">删除</a></td>
+        </tr>
+        <tr>
+          <td>沙和尚</td>
+          <td>shs@lsh.com</td>
+          <td>6000</td>
+          <td><a href="javascript:;">删除</a></td>
+        </tr>
+      </tbody>
+    </table>
+    <form action="#">
+      <div>
+        <label for="name">姓名</label>
+        <input type="text" id="name">
+      </div>
+      <div>
+        <label for="email">邮件</label>
+        <input type="email" id="email">
+      </div>
+      <div>
+        <label for="salary">薪资</label>
+        <input type="number" id="salary">
+      </div>
+      <!--  type="button" 阻止默认跳转行为 -->
+      <button type="button" id="btn">添加</button>
+    </form>
+  </div>
+</body>
+
+</html>
