@@ -1,0 +1,79 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-11-17 23:03:20
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-11-18 15:59:03
+ * @FilePath: /JavaScript/10_DOM/19_读取css样式.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>读取css样式</title>
+  <style>
+    .box1 {
+      /* width: 200px; */
+      width: auto;
+      height: 200px;
+      background-color: #bfa;
+    }
+
+    .box1::before {
+      content: "hello";
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <button id="btn">点我一下</button>
+  <hr>
+  <!-- <div class="box1" style="width: 300px;"></div> -->
+  <div class="box1"></div>
+
+  <script>
+    /* 点击按钮后，读取元素的css样式 */
+    const btn = document.getElementById("btn");
+    const box1 = document.querySelector(".box1");
+
+    btn.onclick = function () {
+      // console.log(box1.style.width); // ""（因为没有内联样式）
+      /*
+          getComputedStyle()
+            - 它会返回一个一个对象，这个对象中包含了当前元素所有的生效的样式
+            - 参数：
+                1. 要获取样式的对象
+                2. 要获取的伪元素
+            - 返回值：
+                返回的一个对象，对象中存储了当前元素的样式
+            - 注意：
+                样式对象中返回的样式值，不一定能拿来直接计算，所以使用时，一定要确保值是可以计算的才去计算
+       */
+
+      let styleObj = getComputedStyle(box1);
+      console.log(styleObj.width); // 200px
+      console.log(styleObj.backgroundColor); // rgb(187, 255, 170)
+
+      console.log(styleObj.width + 100); // 200px100
+      // 计算的时候去掉单位
+      console.log(parseInt(styleObj.width) + 100); // 300
+      // 赋值的时候加上单位才会生效
+      box1.style.width = parseInt(styleObj.width) + 100 + 'px';
+
+      let beforeStyle = getComputedStyle(box1, "::before");
+      // console.log(beforeStyle);
+      console.log(beforeStyle.color);
+
+      // 样式表去掉宽度的时候
+      console.log(styleObj.width); // 1596px
+      console.log(styleObj.left); // auto
+
+      // 当在样式表设置宽度为auto时，还是1596px，所以不设置宽度的时候，宽度有默认值auto
+      console.log(styleObj.width); // 1596px
+    }
+  </script>
+</body>
+
+</html>
