@@ -1,0 +1,89 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-11-19 16:29:01
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-11-19 20:44:30
+ * @FilePath: /JavaScript/10_DOM/21_修改css样式.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>修改css样式</title>
+  <style>
+    .box1 {
+      width: 200px;
+      height: 200px;
+      background-color: #bfa;
+    }
+
+    .box2 {
+      background-color: yellow;
+      width: 300px;
+      height: 500px;
+      border: 10px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  <button id="btn">我点一下</button>
+  <hr>
+  <!-- <div class="box1 box2"></div> -->
+  <div class="box1 box3 box4"></div>
+
+  <script>
+    const btn = document.getElementById("btn");
+    const box1 = document.querySelector(".box1");
+    btn.onclick = function () {
+      // box1.style.width = "400px";
+      // box1.style.height = "400px";
+      // box1.style.backgroundColor = "yellow";
+
+      // 除了直接修改样式外，也可以通过修改 class属性来间接的修改样式
+
+      // box1.className = "box2"; // 因为把class box1改成box2，所以啥也没有
+      // 正确的修改className方式：
+      // box1.className += " box2"; // 让div的class上既有box1，也有box2
+
+
+      /*
+          通过class修改样式的好处：
+            1. 可以一次性修改多个样式
+            2. 对JS和CSS进行解耦
+
+
+          元素.classList 是一个对象，对象中提供了对当前元素的类的各种操作方法
+          元素.classList.add() 向元素中添加一个或多个class
+          元素.classList.remove() 移除元素中的一个或多个class
+          元素.classList.toggle() 切换元素中的class
+          元素.classList.replace() 替换class
+          元素.classList.contains() 检查class，有该class返回true，否false
+       */
+
+
+      // box1.classList.add("box2", "box3", "box4");
+      // box1.classList.add("box1", "box3", "box4");
+
+      // box1.classList.remove("box2");
+
+      // box1.classList.toggle("box2");
+
+      // 当class只有box1和box2时，此时box2替换成box1
+      // box1.classList.replace("box1", "box2");
+
+      // 当class只有box1、box3、box4时，此时将box1替换成box2
+      // box1.classList.replace("box1", "box2");
+
+      console.log(box1.classList.contains("box1")); // true
+      console.log(box1.classList.contains("box2")); // false
+
+
+
+    }
+  </script>
+</body>
+
+</html>
