@@ -1,0 +1,102 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-11-19 13:40:40
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-11-19 15:37:28
+ * @FilePath: /JavaScript/10_DOM/20_其它读取样式的方法.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>其它读取样式的方法</title>
+  <style>
+    #box1 {
+      width: 200px;
+      height: 200px;
+      padding: 50px;
+      margin: 50px;
+      border: 10px solid red;
+      background-color: #bfa;
+      overflow: auto;
+    }
+
+    #box2 {
+      width: 100px;
+      height: 500px;
+      background-color: burlywood;
+    }
+  </style>
+</head>
+
+<body>
+  <button id="btn">点我一下</button>
+  <hr>
+  <div style="position: relative;">
+    <div id="box1">
+      <div id="box2"></div>
+    </div>
+  </div>
+  <script>
+    // console.log(btn); // <button id="btn">点我一下</button>
+    const btn = document.getElementById("btn");
+    const box1 = document.getElementById("box1");
+    const box2 = document.getElementById("box2");
+
+    /*
+        元素.clientHeight
+        元素.clientWidth
+          - 获取元素内部的宽度和高度（包括内容和内边距）
+
+        元素.offsetHeight
+        元素.offsetWidth
+          - 获取元素的课件框的大小（包括内容区、内边距和边框）
+
+        元素.scrollHeight
+        元素.scrollWidth
+          - 获取元素滚动区域的大小
+
+        元素.offsetParent
+          - 获取元素的定位父元素
+          - 定位父元素：离当前元素最近的开启了定位的祖先元素，如果所有的元素都没有开启定位则返回body
+
+        元素.offsetTop
+        元素.offsetLeft
+          - 获取元素相对于其定位父元素的偏移量
+
+        元素.scrollTop
+        元素.scrollLeft
+          - 获取或设置元素滚动条的偏移量
+     */
+    btn.onclick = function () {
+      console.log(box1.clientWidth); // 300
+      console.log(box1.clientHeight); // 300
+
+      console.log(box1.offsetWidth); // 320
+      console.log(box1.offsetHeight); // 320
+
+      console.log(box1.scrollWidth); // 300
+      console.log(box1.scrollHeight); // 600
+
+      // 最外层div开启了相对定位，则返回的父元素是最外层的div，如果最外层div没有开启定位，那么返回的父元素是body
+      console.log(box1.offsetParent); //  body
+      console.log(box2.offsetParent);
+
+      // 当最外层div开启了定位，那么都向最外层div左边看齐计算，如果没有开启则向body左边看齐计算
+      console.log(box1.offsetLeft); // 50
+      console.log(box2.offsetLeft); // 110
+
+      console.log(box1.scrollTop); // 0（默认为0，让下滚动才计算）
+      console.log(box1.scrollLeft); // 0（默认为0，让下滚动才计算）
+      // scrollTop可以进行读改
+      box1.scrollTop = 180;
+      console.log(box1.scrollTop); // 180
+    }
+
+
+  </script>
+</body>
+
+</html>
