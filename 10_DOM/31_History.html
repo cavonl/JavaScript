@@ -1,0 +1,45 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-11-22 21:18:21
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-11-22 21:27:18
+ * @FilePath: /JavaScript/10_DOM/31_History.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>History</title>
+</head>
+
+<body>
+  <button id="btn">点我一下</button>
+  <script>
+    const btn = document.getElementById("btn");
+    btn.addEventListener("click", event => {
+
+      /*
+          history.back() 回退按钮
+          history.forward() 前进按钮
+          history.go() 可以向前跳转也可以向后跳转
+       */
+
+      console.log(history);
+      // 历史记录的数量
+      console.log(history.length); // 1
+
+      // 回退
+      // history.back();
+
+      // 前进
+      // history.forward();
+
+      // +1 是前进一页 -1是后退一页
+      history.go(-1);
+    });
+  </script>
+</body>
+
+</html>
