@@ -1,9 +1,9 @@
 <!--
  * @Author: cavon 425247833@qq.com
- * @Date: 2023-11-25 20:50:41
+ * @Date: 2023-11-26 19:50:29
  * @LastEditors: cavon 425247833@qq.com
- * @LastEditTime: 2023-11-26 21:21:45
- * @FilePath: /JavaScript/10_DOM/37_练习轮播图.html
+ * @LastEditTime: 2023-11-26 21:41:17
+ * @FilePath: /JavaScript/10_DOM/38_练习轮播图.html
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -18,14 +18,19 @@
       padding: 0;
     }
 
+    ul {
+      list-style: none;
+    }
+
+    img {
+      vertical-align: top;
+    }
+
     .outer {
       width: 640px;
       height: 390px;
       margin: 100px auto;
-    }
-
-    ul {
-      list-style: none;
+      position: relative;
     }
 
     .img-list {
@@ -43,8 +48,27 @@
       opacity: 1;
     }
 
-    img {
-      vertical-align: text-top;
+    .prev-next a {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      z-index: 2;
+      height: 60px;
+      color: #fff;
+      font-size: 60px;
+      text-decoration: none;
+      font-weight: bold;
+      opacity: .5;
+      user-select: none;
+    }
+
+    .prev-next a:hover {
+      opacity: 1;
+    }
+
+    #next {
+      right: 0;
     }
   </style>
 </head>
@@ -78,6 +102,12 @@
         </a>
       </li>
     </ul>
+
+    <!-- 添加切换按钮 -->
+    <div class="prev-next">
+      <a id="prev"><</a>
+      <a id="next">></a>
+    </div>
   </div>
   <script>
     /* 实现：自动切换图片 */
@@ -96,6 +126,36 @@
 
       setTimeout(auto, 3000);
     }, 3000);
+
+    // 点击按钮切换图片
+    const prev = document.getElementById("prev");
+    const next = document.getElementById("next");
+
+    // 上一张
+    prev.onclick = function () {
+      const current = document.querySelector(".img-list .current");
+      // 获取上一张图片 || 回到最后一张图片
+      const next = current.previousElementSibling || document.querySelector("li:last-child");
+
+      current.classList.remove("current");
+      next.classList.add("current");
+
+    }
+    // 下一张
+    next.onclick = function () {
+      const current = document.querySelector(".img-list .current");
+      const next = current.nextElementSibling || document.getElementsByTagName("li")[0];
+
+      current.classList.remove("current");
+      next.classList.add("current");
+    }
+
+    /*
+      问题：
+        1. 能不能简化一下代码
+        2. 如何控制图片自动切换的关闭和开启
+     */
+
   </script>
 </body>
 
