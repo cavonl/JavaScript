@@ -1,0 +1,226 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-11-27 15:10:24
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-11-27 18:00:36
+ * @FilePath: /JavaScript/10_DOM/39_练习轮播图.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>练习轮播图</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    img {
+      vertical-align: top;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .outer {
+      width: 640px;
+      height: 390px;
+      margin: 100px auto;
+      position: relative;
+    }
+
+    .img-list {
+      height: 390px;
+    }
+
+    .img-list li {
+      position: absolute;
+      opacity: 0;
+      transition: opacity 1s;
+    }
+
+    li.current {
+      z-index: 1;
+      opacity: 1;
+    }
+
+    .prev-next a {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      z-index: 2;
+      margin: auto;
+      font-size: 60px;
+      color: #fff;
+      height: 60px;
+      line-height: 50px;
+      font-weight: bold;
+      opacity: .5;
+      user-select: none;
+    }
+
+    #next {
+      right: 0;
+    }
+
+    .prev-next a:hover {
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="outer">
+    <ul class="img-list">
+      <li class="current">
+        <a href="javascript:;">
+          <img src="./images/1.png">
+        </a>
+      </li>
+      <li>
+        <a href="javascript:;">
+          <img src="./images/2.png">
+        </a>
+      </li>
+      <li>
+        <a href="javascript:;">
+          <img src="./images/3.png">
+        </a>
+      </li>
+      <li>
+        <a href="javascript:;">
+          <img src="./images/4.png">
+        </a>
+      </li>
+      <li>
+        <a href="javascript:;">
+          <img src="./images/5.png">
+        </a>
+      </li>
+    </ul>
+    <!-- 添加切换按钮 -->
+    <div class="prev-next">
+      <a href="javascript:;" id="prev">&lt;</a>
+      <a href="javascript:;" id="next">&gt;</a>
+    </div>
+  </div>
+  <script>
+    /* 实现：自动切换图片 */
+
+    // // 编写全局定时器
+    // let timer = null;
+    // /*
+    //   当第一次调用toggleChange函数的时候，timer === null，那么就开启定时器；
+    //   当第二次调用toggleChange函数的时候，timer代码已经执行过了，那么timer有值了，所以不会再执行if了，会执行else；
+    //   当第三次调用toggleChange函数的时候，timer === null，所以会开启定时器；
+
+    //   为什么要加这个功能？
+    //     因为当我们去点击这个前后翻页的时候，图片的自动切换和这个手动切换是同时运行的。
+    //     当我们点击上一张的时候，它会瞬间播放下一张，这时候图片会变，因为自动切换生效了，体验感肯定是不好的。
+    //     所以当鼠标移入到图片上时，自动切换需要关闭；当鼠标移出的时候，自动切换需要开启。
+    //  */
+    // function toggleChange() {
+    //   // 判断timer是否是null（===null说明没有开启定时器，那么要开启；
+    //   if (timer === null) {
+    //     timer = setTimeout(function auto() {
+    //       changImg("next");
+    //       timer = setTimeout(auto, 3000);
+    //     }, 3000);
+    //   }
+    //   // !== null 说明有定时器，那么要关闭
+    //   else {
+    //     clearTimeout(timer);
+    //     timer = null;
+    //   }
+    // }
+
+    // 由于timer是全局变量，想把全局变量变成函数内部使用，不希望被别人访问到，立即执行函数派上用场了，那么toggleChange指向的就是返回函数
+    let toggleChange = (function () {
+      // 此时，变量和函数统一为一个作用域，只能被返回函数拿到，其他人拿不到，于是变量就被藏起来了
+      let timer = null;
+      // 返回函数，在函数里面对这个变量进行引用了
+      return () => {
+        // 判断timer是否是null（===null说明没有开启定时器，那么要开启；
+        if (timer === null) {
+          timer = setTimeout(function auto() {
+            changImg("next");
+            timer = setTimeout(auto, 3000);
+          }, 3000);
+        }
+        // !== null 说明有定时器，那么要关闭
+        else {
+          clearTimeout(timer);
+          timer = null;
+        }
+
+      }
+    })();
+
+    toggleChange();
+
+    // 解决图片自动切换的关闭和开启
+    // 获取outer
+    const outer = document.getElementsByClassName("outer")[0];
+    // 鼠标移入关闭自动切换
+    outer.onmouseenter = () => {
+      toggleChange();
+    }
+    // 鼠标移出开启自动切换
+    outer.onmouseleave = () => {
+      toggleChange();
+    }
+
+
+    // 编写定时器
+    // setTimeout(function auto() {
+    //   changImg("next");
+    //   setTimeout(auto, 3000);
+    // }, 3000);
+
+    const prev = document.getElementById("prev");
+    const next = document.getElementById("next");
+
+    // 上一张
+    prev.onclick = function () {
+      changImg("prev");
+    }
+
+    // 下一张
+    next.onclick = function () {
+      changImg("next");
+    }
+
+    /**
+     * @description: 用来切换图片
+     * @param {string} dir 切换图片的方向 prev next
+     */
+    function changImg(dir) {
+      // 获取当前显示的图片
+      const current = document.querySelector(".img-list .current");
+      // 获取下一张图片
+      let next;
+      if (dir === "prev") {
+        next = current.previousElementSibling || document.querySelector("li:last-child");
+      }
+      else if (dir === "next") {
+        next = current.nextElementSibling || document.getElementsByTagName("li")[0];
+      }
+      // 切换显示状态
+      current.classList.remove("current");
+      next.classList.add("current");
+    }
+
+    // 升级：增加轮播图导航点
+
+  </script>
+</body>
+
+</html>
