@@ -1,9 +1,9 @@
 <!--
  * @Author: cavon 425247833@qq.com
- * @Date: 2023-11-29 16:42:14
+ * @Date: 2023-11-29 22:50:22
  * @LastEditors: cavon 425247833@qq.com
- * @LastEditTime: 2023-11-29 21:46:57
- * @FilePath: /JavaScript/10_DOM/41_练习轮播图1.html
+ * @LastEditTime: 2023-11-30 00:11:07
+ * @FilePath: /JavaScript/10_DOM/40_练习轮播图2.html
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +11,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>练习轮播图1</title>
+  <title>练习轮播图2</title>
   <style>
     * {
       margin: 0;
@@ -43,7 +43,7 @@
 
     .img-list li {
       position: absolute;
-      opacity: 0;
+      opacity: .5;
       transition: opacity 1s;
     }
 
@@ -59,11 +59,11 @@
       top: 0;
       bottom: 0;
       margin: auto;
+      height: 60px;
+      line-height: 48px;
       color: #fff;
       font-size: 60px;
       font-weight: bold;
-      height: 60px;
-      line-height: 48px;
     }
 
     #next {
@@ -71,15 +71,14 @@
     }
 
     /* 滑动点切换图片 */
-
     .dot {
       position: absolute;
       z-index: 3;
+      display: flex;
+      justify-content: center;
       left: 0;
       right: 0;
       bottom: 10px;
-      display: flex;
-      justify-content: center;
       margin: auto;
     }
 
@@ -89,7 +88,7 @@
       background-color: #fff;
       margin: 5px;
       border-radius: 50%;
-      opacity: .5;
+      opacity: 0.5;
     }
 
     .dot a:hover,
@@ -146,8 +145,7 @@
   </div>
 
   <script>
-
-    // 设置定时器，显示图片的轮播效果
+    // 设置定时器，让图片自动切换显示
     let toggleChange = (function name() {
       let timer = null;
       return () => {
@@ -165,22 +163,22 @@
     toggleChange();
 
     const outer = document.getElementsByClassName("outer")[0];
-    // 鼠标移入
+    // 鼠标移入关闭定时器
     outer.addEventListener("mouseenter", function () {
       toggleChange();
     });
-    // 鼠标移出
+    // 鼠标移出开启定时器
     outer.addEventListener("mouseleave", function () {
       toggleChange();
     });
 
     // 将ul元素的li元素转换成数组格式
-    const imgArr = Array.from(document.querySelectorAll(".img-list li"));
+    const arrImg = Array.from(document.querySelectorAll(".img-list li"));
     // 滑动点的切换图片动作
-    let dots = Array.from(document.querySelectorAll(".dot a")); // 转换为数组格式
+    let dotsA = Array.from(document.querySelectorAll(".dot a")); // 转换为数组格式
     document.addEventListener("click", function (event) {
       // 检查是否是滑动点的元素
-      const index = dots.indexOf(event.target);
+      const index = dotsA.indexOf(event.target);
       // 如果匹配到滑动点的元素返回1，否则返回-1
       if (index !== -1) {
         // 1. 切换图片 2. 切换滑动点
@@ -197,7 +195,6 @@
     prev.addEventListener("click", function () {
       changeImg("prev")
     });
-
     // 下一张按钮点击事件
     next.addEventListener("click", function () {
       changeImg("next");
@@ -208,35 +205,34 @@
      * @param {string} dir 切换图片的方向
      */
     function changeImg(direction) {
-      const current = document.querySelector(".img-list .current"); // 获取当前显示的图片
+      const currentImg = document.querySelector(".img-list .current"); // 获取当前显示的图片
 
-      let next;
+      let nextImg;
       // 获取下一张要显示的图片
       if (direction === "prev") {
-        next = current.previousElementSibling || imgArr.at(-1);
+        nextImg = currentImg.previousElementSibling || arrImg.at(-1);
       }
       // 获取上一张要显示的图片
       else if (direction === "next") {
-        next = current.nextElementSibling || imgArr[0];
+        nextImg = currentImg.nextElementSibling || arrImg[0];
       }
       // 滑动点切换显示的图片
       else if (typeof direction === "number") {
-        next = imgArr[direction];
+        nextImg = arrImg[direction];
       }
+      // 切换显示图片状态的样式
+      currentImg.classList.remove("current"); // 当前显示的图片删除current样式
+      nextImg.classList.add("current"); // 下一张要显示的图片增加current样式
 
       // 获取要显示的图片的索引
-      const index = imgArr.indexOf(next); // 使用next，是想要显示的下一张图片，图片和滑动点就会切换且同步
-
-      // 切换显示图片状态的样式
-      current.classList.remove("current"); // 当前显示的图片删除current样式
-      next.classList.add("current"); // 下一张要显示的图片增加current样式
-
+      const currentIndex = arrImg.indexOf(nextImg); // 使用next，是想要显示的下一张图片，图片和滑动点就会切换且同步
       // 滑动点的动作
       const currentActive = document.querySelector(".dot .active"); // 获取当前选中的滑动点
       currentActive.classList.remove("active"); // 当前选中的滑动点删掉active样式
       // 当图片自动切换的时候，滑动点也要自动切换
-      dots[index].classList.add("active"); // 将点击的滑动点增加active样式
+      dotsA[currentIndex].classList.add("active"); // 将点击的滑动点增加active样式
     }
+
 
   </script>
 </body>
