@@ -2,7 +2,7 @@
  * @Author: cavon 425247833@qq.com
  * @Date: 2023-11-27 18:13:51
  * @LastEditors: cavon 425247833@qq.com
- * @LastEditTime: 2023-11-29 16:31:15
+ * @LastEditTime: 2023-11-29 21:47:10
  * @FilePath: /JavaScript/10_DOM/40_练习轮播图.html
 -->
 <!DOCTYPE html>
@@ -182,16 +182,17 @@
       const index = dots.indexOf(event.target);
       if (index !== -1) {
         // 切换图片
-        // const current = document.querySelector(".img-list .current");
-        // const next = document.querySelectorAll(".img-list li")[index];
-        // current.classList.remove("current");
-        // next.classList.add("current");
+        // const current = document.querySelector(".img-list .current"); // 获取当前显示的图片
+        // const next = document.querySelectorAll(".img-list li")[index]; // 获取下一张要显示的图片
+        // current.classList.remove("current"); // 当前显示的图片删除current样式
+        // next.classList.add("current"); // 下一张要显示的图片增加current样式
+
         chengeImg(index);
 
-        // 切换active
-        // const currentActive = document.querySelector(".dot .active");
-        // currentActive.classList.remove("active");
-        // event.target.classList.add("active");
+        // 切换滑动点
+        // const currentActive = document.querySelector(".dot .active"); // 获取当前选中的滑动点
+        // currentActive.classList.remove("active"); // 当前选中的滑动点删掉active样式
+        // event.target.classList.add("active"); // 将点击的滑动点增加active样式
       }
     });
 
@@ -278,10 +279,13 @@
         next = imgArr[dir];
       }
 
+      // 获取当前显示的图片索引
+      // const index = imgArr.indexOf(current); // 使用current，是当前显示的图片，会导致滑动点和图片切换不同步，滑动点要慢一拍
+
       // console.log(next); // <li class="current">...</li>
 
       // 获取要显示的图片的索引
-      const index = imgArr.indexOf(next);
+      const index = imgArr.indexOf(next); // 使用next，是想要显示的下一张图片，图片和滑动点就会切换且同步
 
       // 切换显示状态
       current.classList.remove("current");
