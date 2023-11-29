@@ -1,0 +1,302 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-11-27 18:13:51
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-11-29 16:31:15
+ * @FilePath: /JavaScript/10_DOM/40_练习轮播图.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>练习轮播图</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    img {
+      vertical-align: top;
+    }
+
+    .outer {
+      width: 640px;
+      height: 390px;
+      margin: 100px auto;
+      position: relative;
+    }
+
+    .img-list {
+      height: 390px;
+    }
+
+    .img-list li {
+      position: absolute;
+      opacity: 0;
+      transition: opacity 1s;
+    }
+
+    li.current {
+      z-index: 1;
+      opacity: 1;
+    }
+
+    /*  */
+    .peve-next a {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      z-index: 2;
+      margin: auto;
+      color: #fff;
+      font-size: 60px;
+      font-weight: bold;
+      height: 60px;
+      line-height: 48px;
+      opacity: .5;
+    }
+
+    #next {
+      right: 0;
+    }
+
+    .peve-next a:hover {
+      opacity: 1;
+    }
+
+    /* 滑动切换 */
+    /* .dot {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      z-index: 2;
+      text-align: center;
+    }
+
+    .dot a {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border: 1px solid #fff;
+      border-color: hsla(0, 0%, 100%, 0.3);
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.4);
+    } */
+
+    .dot {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      left: 0;
+      right: 0;
+      bottom: 10px;
+      z-index: 3;
+      margin: auto;
+    }
+
+    .dot a {
+      width: 10px;
+      height: 10px;
+      background-color: #fff;
+      margin: 5px;
+      border-radius: 50%;
+      opacity: .5;
+    }
+
+    .dot a:hover,
+    .dot .active {
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="outer">
+    <!-- 图片 -->
+    <ul class="img-list">
+      <li class="current">
+        <a href="javascript:;">
+          <img src="./images/1.png">
+        </a>
+      </li>
+      <li>
+        <a href="javascript:;">
+          <img src="./images/2.png">
+        </a>
+      </li>
+      <li>
+        <a href="javascript:;">
+          <img src="./images/3.png">
+        </a>
+      </li>
+      <li>
+        <a href="javascript:;">
+          <img src="./images/4.png">
+        </a>
+      </li>
+      <li>
+        <a href="javascript:;">
+          <img src="./images/5.png">
+        </a>
+      </li>
+    </ul>
+    <!-- 左右切换 -->
+    <div class="peve-next">
+      <a href="javascript:;" id="prev">&lt;</a>
+      <a href="javascript:;" id="next">&gt;</a>
+    </div>
+    <!-- 滑动点切换 -->
+    <div class="dot">
+      <a href="javascript:;" class="active"></a>
+      <a href="javascript:;"></a>
+      <a href="javascript:;"></a>
+      <a href="javascript:;"></a>
+      <a href="javascript:;"></a>
+    </div>
+  </div>
+  <script>
+    /* 实现：自动切换图片 */
+
+    // 获取5个小点
+    // const dots = document.querySelectorAll(".dot a"); // NodeList(5) [a.active, a, a, a, a]
+
+    // 将查询到的结果转换成数组
+    const dots = Array.from(document.querySelectorAll(".dot a")); // [a.active, a, a, a, a]
+    // 获取图片的数组
+    const imgArr = Array.from(document.querySelectorAll(".img-list li"));
+
+    document.addEventListener("click", (event) => {
+      // 检查 event.target 在数组中出现的位置，有则返回索引，没有则返回-1
+      const index = dots.indexOf(event.target);
+      if (index !== -1) {
+        // 切换图片
+        // const current = document.querySelector(".img-list .current");
+        // const next = document.querySelectorAll(".img-list li")[index];
+        // current.classList.remove("current");
+        // next.classList.add("current");
+        chengeImg(index);
+
+        // 切换active
+        // const currentActive = document.querySelector(".dot .active");
+        // currentActive.classList.remove("active");
+        // event.target.classList.add("active");
+      }
+    });
+
+    /*
+      当第一次调用toggleChange函数的时候，timer === null，那么就开启定时器；
+      当第二次调用toggleChange函数的时候，timer代码已经执行过了，那么timer有值了，所以不会再执行if了，会执行else；
+      当第三次调用toggleChange函数的时候，timer === null，所以会开启定时器；
+
+      为什么要加这个功能？
+        因为当我们去点击这个前后翻页的时候，图片的自动切换和这个手动切换是同时运行的。
+        当我们点击上一张的时候，它会瞬间播放下一张，这时候图片会变，因为自动切换生效了，体验感肯定是不好的。
+        所以当鼠标移入到图片上时，自动切换需要关闭；当鼠标移出的时候，自动切换需要开启。
+     */
+    // 由于timer是全局变量，想把全局变量变成函数内部使用，不希望被别人访问到，立即执行函数派上用场了，那么toggleChange指向的就是返回函数
+    let toggleChange = (function () {
+      // 此时，变量和函数统一为一个作用域，只能被返回函数拿到，其他人拿不到，于是变量就被藏起来了
+      let timer = null;
+      // 返回函数，在函数里面对这个变量进行引用了
+      return () => {
+        // 判断timer是否是null（===null说明没有开启定时器，那么要开启；
+        if (timer === null) {
+          timer = setTimeout(function auto() {
+            chengeImg("next");
+            timer = setTimeout(auto, 3000);
+          }, 3000);
+        }
+        // !== null 说明有定时器，那么要关闭
+        else {
+          clearTimeout(timer);
+          timer = null;
+        }
+
+      }
+    })();
+
+    toggleChange();
+
+    // 解决图片自动切换的关闭和开启
+    // 获取outer
+    const outer = document.getElementsByClassName("outer")[0];
+    // 鼠标移入关闭自动切换
+    outer.onmouseenter = () => {
+      toggleChange();
+    }
+    // 鼠标移出开启自动切换
+    outer.onmouseleave = () => {
+      toggleChange();
+    }
+
+    const prev = document.getElementById("prev");
+    const next = document.getElementById("next");
+
+    // 上一张
+    prev.onclick = function () {
+      chengeImg("prev");
+    }
+
+    // 下一张
+    next.onclick = function () {
+      chengeImg("next");
+    }
+
+    /**
+     * @description: 用来切换图片
+     * @param {string} dir 切换图片的方向 prev next
+     */
+    function chengeImg(dir) {
+      // 获取当前显示的图片
+      const current = document.querySelector(".img-list .current");
+
+      // 获取下一张图片
+      let next;
+      // 上
+      if (dir === "prev") {
+        // console.log(imgArr.at(-1)); // Array 实例的 at() 方法接受一个整数值并返回该索引处的项目，允许正整数和负整数。负整数从数组中的最后一项开始倒数。
+        next = current.previousElementSibling || imgArr.at(-1);
+      }
+      // 下
+      else if (dir === "next") {
+        next = current.nextElementSibling || imgArr[0];
+      }
+      // 索引
+      else if (typeof dir === "number") {
+        next = imgArr[dir];
+      }
+
+      // console.log(next); // <li class="current">...</li>
+
+      // 获取要显示的图片的索引
+      const index = imgArr.indexOf(next);
+
+      // 切换显示状态
+      current.classList.remove("current");
+      next.classList.add("current");
+
+      // 切换active
+      const currentActive = document.querySelector(".dot .active");
+      currentActive.classList.remove("active");
+      // 获取到当前要显示的小点
+      dots[index].classList.add("active");
+    }
+
+
+
+  </script>
+</body>
+
+</html>
