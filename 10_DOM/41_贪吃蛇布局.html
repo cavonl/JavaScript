@@ -1,0 +1,98 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-12-03 18:26:34
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-12-03 20:32:39
+ * @FilePath: /JavaScript/10_DOM/41_贪吃蛇布局.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>贪吃蛇布局</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    #main {
+      width: 360px;
+      height: 420px;
+      border: 10px solid #000000;
+      margin: 50px auto;
+      border-radius: 5%;
+      background-color: #b7d4a8;
+    }
+
+    #stage {
+      width: 304px;
+      height: 304px;
+      border: 2px solid #000000;
+      margin: 20px auto;
+      position: relative;
+    }
+
+    #snake > div {
+      width: 10px;
+      height: 10px;
+      background-color: #000000;
+      position: absolute;
+    }
+
+    #foot {
+      width: 10px;
+      height: 10px;
+      /* background-color: #000000; */
+      position: absolute;
+      top: 100px;
+      left: 120px;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    #foot>div {
+      width: 5px;
+      height: 5px;
+      background-color: #000000;
+      transform: rotate(45deg);
+    }
+
+    #info {
+      display: flex;
+      justify-content: space-between;
+      width: 304px;
+      margin: 0 auto;
+      font: bold 20px courier;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="main">
+    <!-- 游戏主窗口 -->
+    <div id="stage">
+      <!-- 贪吃蛇的身体 -->
+      <div id="snake">
+        <div></div>
+      </div>
+      <!-- 贪吃蛇的食物 -->
+      <div id="foot">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <!-- 游戏通关信息 -->
+    <div id="info">
+      <div>SCORE:&nbsp;<span id="score">100</span></div>
+      <div>LEVEL:&nbsp;<span id="level">1</span></div>
+    </div>
+  </div>
+</body>
+
+</html>
