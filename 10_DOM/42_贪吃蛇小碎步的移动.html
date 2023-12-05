@@ -2,7 +2,7 @@
  * @Author: cavon 425247833@qq.com
  * @Date: 2023-12-03 20:35:04
  * @LastEditors: cavon 425247833@qq.com
- * @LastEditTime: 2023-12-04 17:05:34
+ * @LastEditTime: 2023-12-05 12:56:49
  * @FilePath: /JavaScript/10_DOM/42_贪吃蛇小碎步的移动.html
 -->
 <!DOCTYPE html>
@@ -126,12 +126,15 @@
 
       switch (event.key) {
         case "ArrowUp":
+          // 向上移动贪吃蛇
           head.style.top = head.offsetTop - 10 + "px";
           break;
         case "ArrowDown":
+          // 向下移动贪吃蛇
           head.style.top = head.offsetTop + 10 + "px";
           break;
         case "ArrowLeft":
+          // 向左移动贪吃蛇
           head.style.left = head.offsetLeft - 10 + "px";
           break;
         case "ArrowRight":
