@@ -1,0 +1,183 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-12-04 17:09:47
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-12-05 13:07:44
+ * @FilePath: /JavaScript/10_DOM/43_贪吃蛇流畅的移动.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>贪吃蛇流畅的移动</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    #main {
+      width: 360px;
+      height: 420px;
+      border: 10px solid #000000;
+      border-radius: 5%;
+      background-color: #b7d4ab;
+      margin: 50px auto;
+    }
+
+    #stage {
+      width: 304px;
+      height: 304px;
+      border: 2px solid #000000;
+      margin: 20px auto;
+      position: relative;
+    }
+
+    #snake>div {
+      width: 10px;
+      height: 10px;
+      background-color: #000000;
+      position: absolute;
+    }
+
+    #food {
+      width: 10px;
+      height: 10px;
+      /* background-color: #000000; */
+      position: absolute;
+      top: 100px;
+      left: 120px;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    #food>div {
+      width: 5px;
+      height: 5px;
+      background-color: #000000;
+      transform: rotate(45deg);
+    }
+
+    #info {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 auto;
+      width: 304px;
+      font: bold 20px courier;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="main">
+    <!-- 游戏主窗口 -->
+    <div id="stage">
+      <!-- 贪吃蛇的身体 -->
+      <div id="snake">
+        <div></div>
+      </div>
+      <!-- 贪吃蛇的食物 -->
+      <div id="food">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <!-- 游戏通关信息 -->
+    <div id="info">
+      <div>SCORE:&nbsp;<span id="score">100</span></div>
+      <div>LEVEL:&nbsp;<span id="level">1</span></div>
+    </div>
+  </div>
+
+  <script>
+    /*
+        绑定按键事件：keydown、keyup
+          - 键盘事件只能绑定给可以获取焦点的元素或者是document
+
+        event.keyCode 读取键盘按键，返回按键对应的二进制编码
+        event.key 读取键盘按键，返回按键在键盘上对应的名字
+          - 官方推荐
+     */
+
+    // 获取贪吃蛇
+    const snake = document.getElementById("snake");
+    // 获取贪吃蛇的各个部分
+    const snakes = snake.getElementsByTagName("div");
+    // 获取贪吃蛇的头部
+    const head = snakes[0];
+    console.log(head);
+
+    // 定义一个变量用来存储贪吃蛇的移动方向
+    let direction;
+
+    document.addEventListener("keydown", function (event) {
+      // 通过事件对可以读取到用户按的是哪个按键
+      // console.log(1111, event.keyCode); // 返回按键的编码
+      console.log(1111, event.key); // 返回按键在键盘上对应的名字
+
+      /*
+          当我们按着某个按键不松开时，按键按下事件会持续触发
+          但是第一次和第二次触发的间隔会比较长，这样导致练习中贪吃蛇不能流畅的移动
+
+          贪吃蛇的游戏，蛇是不能停止运动的
+
+          将switch放在外面，是因为把速度和方向分开来设置，速度由定时器来控制，方向由keydown事件来控制。
+          定时器主要做的是每隔一段是以后就去检查direction的值，然后根据direction的值来移动贪吃蛇；
+          keydown事件主要做的是负责设置方向，保证方向不会有卡顿的问题，可以使贪吃蛇连续的去移动。
+
+       */
+
+      // switch (event.key) {
+      //   case "ArrowUp":
+      //     // 向上移动贪吃蛇
+      //     head.style.top = head.offsetTop - 10 + "px";
+      //     break;
+      //   case "ArrowDown":
+      //     // 向下移动贪吃蛇
+      //     head.style.top = head.offsetTop + 10 + "px";
+      //     break;
+      //   case "ArrowLeft":
+      //     // 向左移动贪吃蛇
+      //     head.style.left = head.offsetLeft - 10 + "px";
+      //     break;
+      //   case "ArrowRight":
+      //     // 向右移动贪吃蛇
+      //     head.style.left = head.offsetLeft + 10 + "px";
+      //     break;
+      // }
+
+      //  设置方向
+      direction = event.key;
+    });
+
+    // 控制速度
+    setTimeout(function move() {
+      switch (direction) {
+        case "ArrowUp":
+          // 向上移动贪吃蛇
+          head.style.top = head.offsetTop - 10 + "px";
+          break;
+        case "ArrowDown":
+          // 向下移动贪吃蛇
+          head.style.top = head.offsetTop + 10 + "px";
+          break;
+        case "ArrowLeft":
+          // 向左移动贪吃蛇
+          head.style.left = head.offsetLeft - 10 + "px";
+          break;
+        case "ArrowRight":
+          // 向右移动贪吃蛇
+          head.style.left = head.offsetLeft + 10 + "px";
+          break;
+      }
+      setTimeout(move, 300);
+    }, 300);
+  </script>
+</body>
+
+</html>
