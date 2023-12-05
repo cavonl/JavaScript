@@ -2,7 +2,7 @@
  * @Author: cavon 425247833@qq.com
  * @Date: 2023-12-05 13:34:50
  * @LastEditors: cavon 425247833@qq.com
- * @LastEditTime: 2023-12-05 17:31:31
+ * @LastEditTime: 2023-12-05 18:04:56
  * @FilePath: /JavaScript/10_DOM/44_贪吃蛇和食物的碰撞检测.html
 -->
 <!DOCTYPE html>
@@ -73,10 +73,13 @@
 
 <body>
   <div id="main">
+    <!-- 游戏主窗口 -->
     <div id="stage">
+      <!-- 贪吃蛇的身体 -->
       <div id="snake">
         <div></div>
       </div>
+      <!-- 贪吃蛇的食物 -->
       <div id="food">
         <div></div>
         <div></div>
@@ -84,8 +87,9 @@
         <div></div>
       </div>
     </div>
+    <!-- 游戏通关信息 -->
     <div id="info">
-      <div>SCORE:&nbsp;<span id="score">3</span></div>
+      <div>SCORE:&nbsp;<span id="score">100</span></div>
       <div>LEVEL:&nbsp;<span id="level">1</span></div>
     </div>
   </div>
