@@ -2,7 +2,7 @@
  * @Author: cavon 425247833@qq.com
  * @Date: 2023-12-04 17:09:47
  * @LastEditors: cavon 425247833@qq.com
- * @LastEditTime: 2023-12-05 13:07:44
+ * @LastEditTime: 2023-12-05 17:25:44
  * @FilePath: /JavaScript/10_DOM/43_贪吃蛇流畅的移动.html
 -->
 <!DOCTYPE html>
@@ -127,7 +127,7 @@
           贪吃蛇的游戏，蛇是不能停止运动的
 
           将switch放在外面，是因为把速度和方向分开来设置，速度由定时器来控制，方向由keydown事件来控制。
-          定时器主要做的是每隔一段是以后就去检查direction的值，然后根据direction的值来移动贪吃蛇；
+          定时器主要做的是每隔一段时间以后就去检查direction的值，然后根据direction的值来移动贪吃蛇；
           keydown事件主要做的是负责设置方向，保证方向不会有卡顿的问题，可以使贪吃蛇连续的去移动。
 
        */
