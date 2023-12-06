@@ -2,7 +2,7 @@
  * @Author: cavon 425247833@qq.com
  * @Date: 2023-12-05 20:11:59
  * @LastEditors: cavon 425247833@qq.com
- * @LastEditTime: 2023-12-05 22:03:02
+ * @LastEditTime: 2023-12-06 17:51:24
  * @FilePath: /JavaScript/10_DOM/46_贪吃蛇禁止掉头.html
 -->
 <!DOCTYPE html>
@@ -245,12 +245,12 @@
         snake.insertAdjacentHTML("beforeend", "<div />");
       }
 
-      // 移动贪吃蛇的位置（移动尾巴而不是头部）
-      const tail = snakes[snakes.length - 1]; // 获取尾巴
+      // 获取贪吃蛇的尾巴（需要获取贪吃蛇的尾巴，将尾巴放到贪吃蛇的头部）
+      const tail = snakes[snakes.length - 1];
       // 移动贪吃蛇的位置
       tail.style.left = x + "px";
       tail.style.top = y + "px";
-      // 将最后一个尾巴tail挪到snake的第一个子元素前面
+      // 将尾巴移动到头部位置（将最后一个尾巴tail挪到snake的第一个子元素前面）
       snake.insertAdjacentElement("afterbegin", tail);
 
       setTimeout(move, 300);
