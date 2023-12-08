@@ -2,7 +2,7 @@
  * @Author: cavon 425247833@qq.com
  * @Date: 2023-12-06 20:54:49
  * @LastEditors: cavon 425247833@qq.com
- * @LastEditTime: 2023-12-07 22:25:00
+ * @LastEditTime: 2023-12-08 21:04:10
  * @FilePath: /JavaScript/10_DOM/48_贪吃蛇的分数和等级.html
 -->
 <!DOCTYPE html>
@@ -152,7 +152,6 @@
     // 获取分数score和等级level的span
     const scoreSpan = document.getElementById("score");
     const levelSpan = document.getElementById("level");
-    console.log(scoreSpan, levelSpan);
 
     // 创建变量存储分数和等级
     let score = 0, level = 0;
@@ -173,8 +172,6 @@
     };
 
     document.addEventListener("keydown", event => {
-      // console.log(event.key); // 通过事件可以读取到用户按的是哪个按键
-
       // 按键状态为true && 数组包含了键盘按键
       if (keyActive && keyArr.includes(event.key)) {
         // 身体不超过2 || 方向不能是相反的（不能掉头）
