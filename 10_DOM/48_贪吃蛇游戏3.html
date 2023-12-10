@@ -1,0 +1,194 @@
+<!--
+ * @Author: cavon 425247833@qq.com
+ * @Date: 2023-12-09 21:03:21
+ * @LastEditors: cavon 425247833@qq.com
+ * @LastEditTime: 2023-12-10 16:20:27
+ * @FilePath: /JavaScript/10_DOM/48_贪吃蛇游戏3.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>贪吃蛇游戏3</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    #main {
+      width: 360px;
+      height: 420px;
+      background-color: #b7d4ab;
+      border: 10px solid #000000;
+      border-radius: 5%;
+      margin: 50px auto;
+    }
+
+    #stage {
+      width: 304px;
+      height: 304px;
+      border: 2px solid #000000;
+      margin: 20px auto;
+      position: relative;
+    }
+
+    #snake>div {
+      width: 10px;
+      height: 10px;
+      background-color: #000000;
+      border: 1px solid #b7d4ab;
+      position: absolute;
+    }
+
+    #food {
+      width: 10px;
+      height: 10px;
+      position: absolute;
+      top: 100px;
+      left: 120px;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    #food>div {
+      width: 5px;
+      height: 5px;
+      background-color: #000000;
+      transform: rotate(45deg);
+    }
+
+    #info {
+      display: flex;
+      justify-content: space-between;
+      width: 304px;
+      margin: auto;
+      font: bold 20px courier;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="main">
+    <div id="stage">
+      <div id="snake">
+        <div></div>
+      </div>
+      <div id="food">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <div id="info">
+      <div>SCORE:&nbsp;<span id="score">0</span></div>
+      <div>LEVEL:&nbsp;<span id="level">1</span></div>
+    </div>
+  </div>
+
+  <script>
+    const snake = document.getElementById("snake");
+    const snakes = snake.getElementsByTagName("div");
+
+    let direction;
+
+    const food = document.getElementById("food");
+
+    const keyArr = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
+
+    // 禁止掉头
+    const keyObj = {
+      "ArrowUp": "ArrowDown",
+      "ArrowDown": "ArrowUp",
+      "ArrowLeft": "ArrowRight",
+      "ArrowRight": "ArrowLeft"
+    };
+
+    // 禁止在3秒内多次操作按键
+    let keyActive = true;
+
+    // 分数等级
+    let score = 0, level = 0;
+    let scoreSpan = document.getElementById("score");
+    let levelSpan = document.getElementById("level");
+
+    document.addEventListener("keydown", function (event) {
+      if (keyArr.includes(event.key)) {
+        if (snakes.length < 2 || keyObj[direction] !== event.key) {
+          direction = event.key;
+          keyActive = false;
+        }
+      }
+    });
+
+    setTimeout(function move() {
+      const head = snakes[0];
+      let x = head.offsetLeft, y = head.offsetTop;
+
+      switch (direction) {
+        case "ArrowUp":
+          y = y - 10;
+          break;
+        case "ArrowDown":
+          y = y + 10;
+          break;
+        case "ArrowLeft":
+          x = x - 10;
+          break;
+        case "ArrowRight":
+          x = x + 10;
+          break;
+      }
+
+      // 如果贪吃蛇吃到食物
+      if (head.offsetTop === food.offsetTop && head.offsetLeft === food.offsetLeft) {
+        // 身体增加一节
+        snake.insertAdjacentHTML("beforeend", "<div />");
+        // 食物随机出现
+        const X_Y = Math.floor(Math.random() * 10) * 30;
+        food.style.top = X_Y + "px";
+        food.style.left = X_Y + "px";
+
+        // 分数等级
+        score++;
+        scoreSpan.textContent = score;
+
+        if (score % 2 === 0 && level < 14) {
+          level++;
+          levelSpan.textContent = level + 1;
+        }
+      }
+
+      // 撞到墙
+      if (x < 0 || x > 290 || y < 0 || y > 290) {
+        alert("撞到墙了，游戏结束！");
+        document.location.reload();
+        return;
+      }
+
+      // 撞到自己
+      for (let i = 0; i < snakes.length - 1; i++) {
+        if (snakes[i].offsetLeft === x && snakes[i].offsetTop === y) {
+          alert("撞到自己了，游戏结束！");
+          document.location.reload();
+          return;
+        }
+      }
+
+      let tail = snakes[snakes.length - 1];
+      tail.style.top = y + "px";
+      tail.style.left = x + "px";
+      snake.insertAdjacentElement("afterbegin", tail);
+
+      keyActive = true;
+
+      setTimeout(move, 300 - level * 20);
+    }, 300);
+  </script>
+</body>
+
+</html>
