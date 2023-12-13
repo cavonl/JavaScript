@@ -2,7 +2,7 @@
  * @Author: chengfun 425247833@qq.com
  * @Date: 2023-08-15 18:29:11
  * @LastEditors: cavon 425247833@qq.com
- * @LastEditTime: 2023-12-13 18:09:56
+ * @LastEditTime: 2023-12-13 18:28:27
  * @FilePath: /JavaScript/README.md
 -->
 ## JavaScript
@@ -105,3 +105,21 @@
   - String
   - 正则表达式
   - 垃圾回收（GC）
+
+### DOM（Document Object Model——文档对象模型）
+主要包括：
+  - DOM基本使用
+  - document对象
+  - 元素节点的属性和方法
+  - 文本节点
+  - 属性节点
+  - 事件（event）
+  - 文档的加载
+  - DOM的修改、添加、删除
+  - 节点的复制、修改、读取
+  - 事件对象：冒泡、排序、委派、捕捉
+  - BOM对象
+  - 定时器
+  - 事件循环（堆栈）
+  - 轮播图、贪吃蛇游戏
+
